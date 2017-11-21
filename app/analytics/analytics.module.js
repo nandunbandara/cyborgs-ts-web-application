@@ -1,4 +1,4 @@
 
 'use strict';
 
-angular.module('clms.analytics',[]);
+angular.module('cts.analytics',[]);

@@ -1,16 +1,4 @@
-angular.module('clms.analytics')
+angular.module('cts.analytics')
 
-    .directive('anlyticsStudent', function(){
-
-        return {
-            templateUrl: 'app/analytics/templates/main-view-student.html'
-        };
-    })
-    .directive('anlyticsTeacher', function(){
-
-        return {
-            templateUrl: 'app/analytics/templates/main-view-teacher.html'
-        };
-    })
 
 

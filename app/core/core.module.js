@@ -1,9 +1,6 @@
-/**
- * Created by Nandun Bandara on 9/18/17.
- */
 'use strict'
 
-angular.module('clms.core',[
+angular.module('cts.core',[
     'ui.router',
     'ngMaterial',
     'mdPickers',
@@ -11,7 +8,7 @@ angular.module('clms.core',[
     'angularFileUpload',
     'LocalStorageModule',
     'ngRightClick',
-    'clms.core.directives',
-    'clms.core.filters'
+    'cts.core.directives',
+    'cts.core.filters'
 ]);
 

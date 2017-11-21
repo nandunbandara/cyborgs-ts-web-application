@@ -1,16 +1,13 @@
-/**
- * Created by nandunb on 9/19/17.
- */
-
 'use strict';
 
-angular.module('clms.routes', [
+angular.module('cts.routes', [
     'ui.router',
-    'clms.analytics.route',
-    'clms.dashboard.route',
-    'clms.notification-mgt.route',
-    'clms.reminder-mgt.route',
-    'clms.user-mgt.route'
+    'cts.dashboard.route',
+    'cts.analytics.route',
+    'cts.trip-mgt.route',
+    'cts.user-mgt.route',
+    'cts.payment-mgt.route'
+
 ])
 
 .config(($stateProvider, $urlRouterProvider)=>{

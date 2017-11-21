@@ -1,10 +1,6 @@
-/**
- * Created by nandunb on 9/19/17.
- */
-
 'use strict';
 
-angular.module('clms.dashboard.route', [])
+angular.module('cts.dashboard.route', [])
 
 .config(($stateProvider, $urlRouterProvider)=>{
     $urlRouterProvider
