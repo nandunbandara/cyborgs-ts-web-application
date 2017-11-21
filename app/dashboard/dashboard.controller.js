@@ -12,7 +12,7 @@ angular.module('cts.dashboard',[])
 
 })
 
-.controller('feedCtrl', function(Dashboard){
+.controller('feedCtrl', function(){
 
     const self = this;
 
