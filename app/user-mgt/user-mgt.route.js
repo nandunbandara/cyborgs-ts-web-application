@@ -6,14 +6,10 @@ angular.module('cts.user-mgt.route',[])
     $urlRouterProvider
         .otherwise('/');
 
-    /*
-        Enable below lines when need
-     */
-
-    // $stateProvider
-    //     .state('',{
-    //         url:'',
-    //         templateUrl: '',
-    //         controller: ''
-    //     })
+    $stateProvider
+        .state('login',{
+            url:'/login',
+            templateUrl: 'app/user-mgt/templates/login.html',
+            controller: 'loginCtrl as login'
+        })
 })
