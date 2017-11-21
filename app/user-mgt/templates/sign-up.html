@@ -1,0 +1,56 @@
+<div>
+    <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" flex>
+        <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2><span>Sign Up Form</span></h2>
+                </div>
+            </md-toolbar>
+
+            <md-card-content>
+                <form name="signUpForm">
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Name </label>
+                        <input ng-model="user.name">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Email </label>
+                        <input ng-model="user.email">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Contact number </label>
+                        <input ng-model="user.contact">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Type</label>
+                        <md-select ng-model="user.type">
+                            <md-option ng-repeat="typies in signUp.userTypies" value="{{typies.type}}">
+                                {{typies.type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    </br>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Password </label>
+                        <input ng-model="user.password">
+                    </md-input-container>
+
+                    <md-button ng-disabled="false" class="md-raised md-primary">Sign Up</md-button>
+
+                </form>
+            </md-card-content>
+        </md-card>
+    </md-content>
+
+    <!--sign up toast area-->
+    <br/>
+    <br/>
+    <br/>
+    <div id="toastParent"></div>
+</div>

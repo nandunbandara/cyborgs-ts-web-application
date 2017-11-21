@@ -92,3 +92,13 @@ angular.module('cts.user-mgt.controller', [])
         }
 
     })
+
+    .controller('signUpCtrl', function (Auth) {
+
+        const self = this;
+
+        self.userTypies = [
+            {"type":"Foreign passenger"},
+            {"type":"Local passenger"}
+        ]
+    })
