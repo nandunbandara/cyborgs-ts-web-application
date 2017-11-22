@@ -14,13 +14,14 @@ angular.module('cts.user-mgt.controller', [])
         };
 
         self.isVisibleSignUp = false;
-        self.isLoding = true;
+
+        self.isLoding = false;
 
 
         self.doLogin =  (loginData) => {
 
             self.isVisibleSignUp = true;
-            self.isLoding = false;
+            self.isLoding = true;
 
             if (loginData) {
 
@@ -73,7 +74,7 @@ angular.module('cts.user-mgt.controller', [])
                     }
 
                 }).catch( (err) => {
-                    self.isLoding = true;
+                    self.isLoding = false;
                     self.showLoginToast("Could not authenticate user", 'error-toast')
                 })
             }
@@ -103,6 +104,16 @@ angular.module('cts.user-mgt.controller', [])
                     .hideDelay(1500)
                     .parent('toastParent')
             );
+        }
+
+        self.visiblityOfLogin = (formValidity) =>{
+
+            if(formValidity && !self.isLoding) {
+                return false;
+            }
+            else{
+                return true;
+            }
         }
 
     })
@@ -221,6 +232,16 @@ angular.module('cts.user-mgt.controller', [])
             }
 
 
+        }
+
+        self.visiblityOfsignUp = (formValidity) =>{
+
+            if(formValidity && !self.isLoding) {
+                return false;
+            }
+            else{
+                return true;
+            }
         }
 
     })

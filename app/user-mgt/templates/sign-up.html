@@ -46,7 +46,7 @@
                     </div>
 
                     <md-button ng-disabled="signUp.isLoding" class="md-raised md-primary" ng-click="signUp.showLogin()">Back</md-button>
-                    <md-button ng-disabled="!signUpForm.$valid" class="md-raised md-primary" ng-click="signUp.doSignUp(signUp.user)">Sign Up</md-button>
+                    <md-button ng-disabled="signUp.visiblityOfsignUp(signUpForm.$valid)" class="md-raised md-primary" ng-click="signUp.doSignUp(signUp.user)">Sign Up</md-button>
 
                 </form>
             </md-card-content>
