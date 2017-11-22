@@ -79,6 +79,11 @@ angular.module('cts.user-mgt.controller', [])
             return JSON.parse($window.atob(base64));
         }
 
+        self.showSignUp = function () {
+
+            $location.path('/signup');
+        }
+
         self.showLoginToast = function (message, theme) {
             $mdToast.show(
                 $mdToast.simple()
@@ -100,7 +105,6 @@ angular.module('cts.user-mgt.controller', [])
             {"type":"Foreign passenger"},
             {"type":"Local passenger"}
         ];
-
 
         //sign up
         self.doSignUp = function (signUpDetails) {
@@ -128,7 +132,6 @@ angular.module('cts.user-mgt.controller', [])
 
         }
 
-
         //validation
 
         // validate contact number
@@ -152,6 +155,11 @@ angular.module('cts.user-mgt.controller', [])
 
             );
 
+        }
+
+        self.showLogin = function () {
+
+            $location.path('/login');
         }
 
     })
