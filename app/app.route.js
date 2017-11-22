@@ -6,7 +6,9 @@ angular.module('cts.routes', [
     'cts.analytics.route',
     'cts.trip-mgt.route',
     'cts.user-mgt.route',
-    'cts.payment-mgt.route'
+    'cts.user-mgt.controller',
+    'cts.payment-mgt.route',
+    'cts.user-mgt.helper'
 
 ])
 

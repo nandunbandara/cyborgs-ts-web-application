@@ -6,5 +6,7 @@ angular.module('cts', [
     'cts.dashboard',
     'cts.analytics',
     'cts.user-mgt',
-    'cts.payment-mgt'
+    'cts.payment-mgt',
+
+
 ])
