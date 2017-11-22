@@ -14,11 +14,11 @@ angular.module('cts.user-mgt.controller', [])
         };
 
 
-        self.doLogin = function (loginData) {
+        self.doLogin =  (loginData) => {
 
             if (loginData) {
 
-                Auth.login(loginData).then(function (response) {
+                Auth.login(loginData).then( (response) =>{
 
                     //store user details in session storage
                     $window.sessionStorage.setItem('email',self.parseToken(response.data.token).email);
@@ -66,7 +66,7 @@ angular.module('cts.user-mgt.controller', [])
 
                     }
 
-                }).catch(function (err) {
+                }).catch( (err) => {
 
                     self.showLoginToast("Could not authenticate user", 'error-toast')
                 })
@@ -74,18 +74,22 @@ angular.module('cts.user-mgt.controller', [])
         }
 
         self.parseToken = (token)=>{
+
             let base64Url = token.split('.')[1];
             let base64 = base64Url.replace('-','+').replace('_','/');
             return JSON.parse($window.atob(base64));
+
         }
 
-        self.showSignUp = function () {
+        self.showSignUp =  () => {
 
             $location.path('/signup');
         }
 
-        self.showLoginToast = function (message, theme) {
+        self.showLoginToast =  (message, theme) => {
+
             $mdToast.show(
+
                 $mdToast.simple()
                     .textContent(message)
                     .position('bottom')
@@ -107,12 +111,12 @@ angular.module('cts.user-mgt.controller', [])
         ];
 
         //sign up
-        self.doSignUp = function (signUpDetails) {
+        self.doSignUp =  (signUpDetails) => {
 
             //validate and save
             if( self.isContactNumber(signUpDetails.contact) ){
 
-                Auth.signUp(signUpDetails).then(function (response) {
+                Auth.signUp(signUpDetails).then( (response) => {
 
                     if(response.data.success == true){
 
