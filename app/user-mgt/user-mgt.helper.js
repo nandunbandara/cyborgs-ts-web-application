@@ -27,5 +27,14 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
+        authFactory.createPayementAccoutn = (userId) =>{
+
+            //create payement account by sending user id
+            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/accounts".concat(userId)).then( (response) =>{
+
+                return response;
+            });
+        };
+
         return authFactory;
     })
