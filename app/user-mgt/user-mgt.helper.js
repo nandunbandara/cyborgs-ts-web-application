@@ -18,10 +18,10 @@ angular.module('cts.user-mgt.helper',[])
         };
 
         authFactory.signUp =  (signUpDetails) => {
-    //https://cyborgs-ts-auth-service.herokuapp.com/users/
+
             //add user by sending user details
-            return $http.post("http://localhost:9801/users",signUpDetails).then( (response) =>{
-console.log(response);
+            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/users/",signUpDetails).then( (response) =>{
+
                 return response;
 
             });

@@ -13,8 +13,14 @@ angular.module('cts.user-mgt.controller', [])
             password: ""
         };
 
+        self.isVisibleSignUp = false;
+        self.isLoding = true;
+
 
         self.doLogin =  (loginData) => {
+
+            self.isVisibleSignUp = true;
+            self.isLoding = false;
 
             if (loginData) {
 
@@ -67,7 +73,7 @@ angular.module('cts.user-mgt.controller', [])
                     }
 
                 }).catch( (err) => {
-
+                    self.isLoding = true;
                     self.showLoginToast("Could not authenticate user", 'error-toast')
                 })
             }
@@ -110,6 +116,8 @@ angular.module('cts.user-mgt.controller', [])
             {"type":"Local passenger"}
         ];
 
+        self.isLoding = false;
+
         self.user = {
             "name":"",
             "email":"",
@@ -121,6 +129,8 @@ angular.module('cts.user-mgt.controller', [])
 
         //sign up
         self.doSignUp =  (signUpDetails) => {
+
+            self.isLoding = true;
 
             //validate and save
             if( self.isContactNumber(signUpDetails.contact) ){
@@ -152,8 +162,8 @@ angular.module('cts.user-mgt.controller', [])
                         $location.path('/login');
 
                     }else{
-
-                        self.showToast(response.data.message, 'error-toast');
+                        self.isLoding = false;
+                        self.showToast('error-toast',response.data.message);
 
                     }
 

@@ -41,7 +41,11 @@
                         <input ng-model="signUp.user.password" required="">
                     </md-input-container>
 
-                    <md-button ng-disabled="false" class="md-raised md-primary" ng-click="signUp.showLogin()">Back</md-button>
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="signUp.isLoding">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-button ng-disabled="signUp.isLoding" class="md-raised md-primary" ng-click="signUp.showLogin()">Back</md-button>
                     <md-button ng-disabled="!signUpForm.$valid" class="md-raised md-primary" ng-click="signUp.doSignUp(signUp.user)">Sign Up</md-button>
 
                 </form>
@@ -53,5 +57,8 @@
     <br/>
     <br/>
     <br/>
-    <div id="toastParent"></div>
+    <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" flex>
+        <div id="toastParent"></div>
+    </md-content>
+
 </div>
