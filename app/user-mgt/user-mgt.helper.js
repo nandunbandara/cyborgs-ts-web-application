@@ -18,19 +18,19 @@ angular.module('cts.user-mgt.helper',[])
         };
 
         authFactory.signUp =  (signUpDetails) => {
-
+    //https://cyborgs-ts-auth-service.herokuapp.com/users/
             //add user by sending user details
-            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/users/",signUpDetails).then( (response) =>{
-
+            return $http.post("http://localhost:9801/users",signUpDetails).then( (response) =>{
+console.log(response);
                 return response;
 
             });
         };
 
-        authFactory.createPayementAccoutn = (userId) =>{
+        authFactory.createPayementAccoutn = (accountDetails) =>{
 
             //create payement account by sending user id
-            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/accounts".concat(userId)).then( (response) =>{
+            return $http.post("https://cyborgs-ts-payment-service.herokuapp.com/accounts/",accountDetails).then( (response) =>{
 
                 return response;
             });
