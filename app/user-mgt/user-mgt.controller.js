@@ -120,6 +120,9 @@ angular.module('cts.user-mgt.controller', [])
 
                     if(response.data.success == true){
 
+                        //create payement account
+
+
                         self.showToast('success-toast', response.data.message);
                         $location.path('/login');
 
