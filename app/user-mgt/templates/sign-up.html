@@ -13,22 +13,22 @@
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Name </label>
-                        <input ng-model="user.name">
+                        <input ng-model="user.name" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Email </label>
-                        <input ng-model="user.email">
+                        <input ng-model="user.email" type="email" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Contact number </label>
-                        <input ng-model="user.contact">
+                        <input ng-model="user.contact" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Type</label>
-                        <md-select ng-model="user.type">
+                        <md-select ng-model="user.type" required="">
                             <md-option ng-repeat="typies in signUp.userTypies" value="{{typies.type}}">
                                 {{typies.type}}
                             </md-option>
@@ -38,10 +38,11 @@
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Password </label>
-                        <input ng-model="user.password">
+                        <input ng-model="user.password" required="">
                     </md-input-container>
 
-                    <md-button ng-disabled="false" class="md-raised md-primary">Sign Up</md-button>
+                    <md-button ng-disabled="false" class="md-raised md-primary">Back</md-button>
+                    <md-button ng-disabled="!signUpForm.$valid" class="md-raised md-primary" ng-click="signUp.doSignUp(user)">Sign Up</md-button>
 
                 </form>
             </md-card-content>

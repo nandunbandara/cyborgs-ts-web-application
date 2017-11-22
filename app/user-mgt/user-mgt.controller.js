@@ -21,7 +21,6 @@ angular.module('cts.user-mgt.controller', [])
                 Auth.login(loginData).then(function (response) {
 
                     //store user details in session storage
-                    console.log(self.parseToken(response.data.token));
                     $window.sessionStorage.setItem('email',self.parseToken(response.data.token).email);
                     $window.sessionStorage.setItem('expiryDate',self.parseToken(response.data.token).expiryDate);
                     $window.sessionStorage.setItem('name',self.parseToken(response.data.token).name);
@@ -93,12 +92,66 @@ angular.module('cts.user-mgt.controller', [])
 
     })
 
-    .controller('signUpCtrl', function (Auth) {
+    .controller('signUpCtrl', function (Auth, $location, $mdToast) {
 
         const self = this;
 
         self.userTypies = [
             {"type":"Foreign passenger"},
             {"type":"Local passenger"}
-        ]
+        ];
+
+
+        //sign up
+        self.doSignUp = function (signUpDetails) {
+
+            //validate and save
+            if( self.isContactNumber(signUpDetails.contact) ){
+
+                Auth.signUp(signUpDetails).then(function (response) {
+
+                    if(response.data.success == true){
+
+                        self.showToast('success-toast', response.data.message);
+                        $location.path('/login');
+
+                    }else{
+
+                        self.showLoginToast(response.data.message, 'error-toast');
+
+                    }
+
+                })
+
+
+            }
+
+        }
+
+
+        //validation
+
+        // validate contact number
+        self.isContactNumber = function (contactNumber) {
+
+          if(contactNumber.length == 10){
+              return true;
+          }
+
+        }
+
+        self.showToast = function(type, message){
+
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom')
+                    .theme(type)
+                    .hideDelay(1500)
+                    .parent('userForm')
+
+            );
+
+        }
+
     })

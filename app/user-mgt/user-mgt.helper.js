@@ -17,6 +17,15 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
+        authFactory.signUp = function (signUpDetails) {
+
+            //add user by sending user details
+            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/users/",signUpDetails).then(function (response) {
+
+                return response;
+
+            });
+        };
 
         return authFactory;
     })
