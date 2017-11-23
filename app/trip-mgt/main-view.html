@@ -1,21 +1,30 @@
-<div layout="column">
-    <md-content layout="row" ng-cloak="ng-cloak" flex>
-        <section>
-            <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" flex>
-                <md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h2><span>History</span></h2>
-                    </div>
-                </md-toolbar>
-            </md-content>
-            <md-list layout-padding="">
-                <md-list-item class="md-3-line" ng-repeat="item in trip.trips" ng-click="null">
-                    <div class="md-list-item-text">
-                        <h3><b>{{item.startPoint}} To {{item.endPoint}} </b></h3>
-                        <h4>{{item.joureyDate}}</h4>
-                    </div>
-                </md-list-item>
-            </md-list>
-        </section>
-    </md-content>
-</div>
+<md-content>
+
+    <md-toolbar md-scroll-shrink ng-if="true">
+        <div class="md-toolbar-tools">
+            <h3>
+                <span>History</span>
+            </h3>
+        </div>
+    </md-toolbar>
+
+    <md-list flex>
+        <md-subheader class="md-no-sticky"></md-subheader>
+        <div class="col-md-12">
+            <md-list-item class="md-3-line" ng-repeat="item in trip.trips"
+                          ng-click="null">
+                <img ng-src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/128/Bus-icon.png"
+                     class="md-avatar">
+                <div class="md-list-item-text" layout="column">
+                    <h3>
+                        <b> {{ item.startPoint}} </b>  To <b> {{ item.endPoint}}</b>
+                        <p>Distance : {{item.distance}}</p>
+                        <p>Date : {{item.joureyDate}}</p>
+                        <p>Bus : {{item.busNumber}}</p>
+                    </h3>
+                </div>
+            </md-list-item>
+        </div>
+    </md-list>
+</md-content>
+

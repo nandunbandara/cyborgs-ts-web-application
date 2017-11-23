@@ -6,14 +6,17 @@ angular.module('cts.trip-mgt.controller',[])
 
         const self = this;
 
-        // self.tripDetails = () =>{
-        //
-        //     Trip.getTripDtails(userId).then((response) => {
-        //         console.log(response);
-        //     })
-        // }
+        self.loggedUserId = sessionStorage.getItem('userId');
 
-       // self.tripDetails();
+        self.tripDetails = () =>{
+
+            Trip.getTripDtails(1).then((response) => {
+
+                console.log(response);
+            })
+        }
+
+        self.tripDetails();
 
         self.trips = [{
 

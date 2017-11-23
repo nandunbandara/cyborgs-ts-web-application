@@ -9,7 +9,7 @@ angular.module('cts.trip-mgt.helper',[])
         tripFactory.getTripDtails = (userId) =>{
 
             // Authenticates the user by sending credentials to the backend
-            return $http.get("https://cyborgs-ts-auth-service.herokuapp.com/trips/".concat(userId)).then( (response) => {
+            return $http.get("https://cyborgs-ts-trip-service.herokuapp.com/trips".concat(userId)).then( (response) => {
 
                     return response;
             });
