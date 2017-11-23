@@ -246,12 +246,11 @@ angular.module('cts.user-mgt.controller', [])
 
     })
 
-    .controller('userCtrl', function (Auth ,$mdToast) {
+    .controller('userCtrl', function (Auth ,$mdToast, $scope) {
 
         const self = this;
 
         self.isLoding =false;
-
         self.users;
 
 
@@ -277,14 +276,17 @@ angular.module('cts.user-mgt.controller', [])
                     self.showToast('success-toast', response.data.message);
 
                     //reset page
-                    self.userForm.$setPristine();
-                    self.userForm.$setUntouched();
-                    console.log('fsdfsdf');
+                    self.resetForm();
+                    $scope.userForm.$setPristine();
+                    $scope.userForm.$setUntouched();
+                    self.showAllUsers();
 
                 }else{
 
                     self.isLoding =false;
                     self.showToast('error-toast',response.data.message);
+
+
                 }
 
 
