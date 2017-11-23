@@ -27,10 +27,10 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
-        authFactory.createPayementAccoutn = (userId) =>{
+        authFactory.createPayementAccoutn = (accountDetails) =>{
 
             //create payement account by sending user id
-            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/accounts".concat(userId)).then( (response) =>{
+            return $http.post("https://cyborgs-ts-payment-service.herokuapp.com/accounts/",accountDetails).then( (response) =>{
 
                 return response;
             });

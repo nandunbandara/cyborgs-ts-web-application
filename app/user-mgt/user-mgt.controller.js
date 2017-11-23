@@ -13,8 +13,15 @@ angular.module('cts.user-mgt.controller', [])
             password: ""
         };
 
+        self.isVisibleSignUp = false;
+
+        self.isLoding = false;
+
 
         self.doLogin =  (loginData) => {
+
+            self.isVisibleSignUp = true;
+            self.isLoding = true;
 
             if (loginData) {
 
@@ -67,7 +74,7 @@ angular.module('cts.user-mgt.controller', [])
                     }
 
                 }).catch( (err) => {
-
+                    self.isLoding = false;
                     self.showLoginToast("Could not authenticate user", 'error-toast')
                 })
             }
@@ -99,9 +106,19 @@ angular.module('cts.user-mgt.controller', [])
             );
         }
 
+        self.visiblityOfLogin = (formValidity) =>{
+
+            if(formValidity && !self.isLoding) {
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
     })
 
-    .controller('signUpCtrl', function (Auth, $location, $mdToast) {
+    .controller('signUpCtrl', function(Auth, $location, $mdToast) {
 
         const self = this;
 
@@ -110,25 +127,54 @@ angular.module('cts.user-mgt.controller', [])
             {"type":"Local passenger"}
         ];
 
+        self.isLoding = false;
+
+        self.user = {
+            "name":"",
+            "email":"",
+            "type":"",
+            "contact":"",
+            "password":"",
+            "expiryDate":""
+        }
+
         //sign up
         self.doSignUp =  (signUpDetails) => {
+
+            self.isLoding = true;
 
             //validate and save
             if( self.isContactNumber(signUpDetails.contact) ){
 
+                //self.setExpiryDate(self.user.type);
+
                 Auth.signUp(signUpDetails).then( (response) => {
+                    console.log(response);
 
                     if(response.data.success == true){
 
-                        //create payement account
+                        var accountDetails = {
+                            "account":{
+                                "userId":response.data.userId
+                            }
+                        }
 
+                        //create payement account
+                        Auth.createPayementAccoutn(accountDetails).then((res) =>{
+
+                            if(res.data.success == false){
+
+                                self.showToast('success-toast', response.data.message);
+                                $location.path('/signup');
+                            }
+                        })
 
                         self.showToast('success-toast', response.data.message);
                         $location.path('/login');
 
                     }else{
-
-                        self.showLoginToast(response.data.message, 'error-toast');
+                        self.isLoding = false;
+                        self.showToast('error-toast',response.data.message);
 
                     }
 
@@ -139,10 +185,8 @@ angular.module('cts.user-mgt.controller', [])
 
         }
 
-        //validation
-
         // validate contact number
-        self.isContactNumber = function (contactNumber) {
+        self.isContactNumber =  (contactNumber) => {
 
           if(contactNumber.length == 10){
               return true;
@@ -150,7 +194,7 @@ angular.module('cts.user-mgt.controller', [])
 
         }
 
-        self.showToast = function(type, message){
+        self.showToast = (type, message) =>{
 
             $mdToast.show(
                 $mdToast.simple()
@@ -164,9 +208,40 @@ angular.module('cts.user-mgt.controller', [])
 
         }
 
-        self.showLogin = function () {
+        self.showLogin =  ()=>{
 
             $location.path('/login');
+        }
+
+        //set expiry date
+        self.setExpiryDate = (passengerType)=>{
+
+            var localPassengerExpirayDate = 24;
+            var ForeignPassengerExpiryDate = 3;
+
+
+            var CurrentDate = new Date();
+
+            if(passengerType == "Local passenger"){
+
+                self.user.expiryDate =  new Date(CurrentDate.setMonth(CurrentDate.getMonth() + localPassengerExpirayDate));
+
+            }else{
+
+                self.user.expiryDate =  new Date(CurrentDate.setMonth(CurrentDate.getMonth() + ForeignPassengerExpiryDate));
+            }
+
+
+        }
+
+        self.visiblityOfsignUp = (formValidity) =>{
+
+            if(formValidity && !self.isLoding) {
+                return false;
+            }
+            else{
+                return true;
+            }
         }
 
     })
