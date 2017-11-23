@@ -55,11 +55,11 @@ angular.module('cts', [
 
                             if ($rootScope.user) {
 
-                                if($rootScope.user.permission != toState.permissions[0] && $rootScope.user.permission == "transport manager") {
+                                if($rootScope.user.permission != toState.permissions[0] && $rootScope.user.permission == "Transport manager") {
 
                                     $location.path("/dashboard/feed");
 
-                                } else if ($rootScope.user.permission == toState.permissions[0] && $rootScope.user.permission == "admin") {
+                                } else if ($rootScope.user.permission == toState.permissions[0] && $rootScope.user.permission == "Admin") {
 
                                     $location.path("/dashboard/feed");
 

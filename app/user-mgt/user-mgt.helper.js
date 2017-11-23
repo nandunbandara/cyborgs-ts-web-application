@@ -7,10 +7,10 @@ angular.module('cts.user-mgt.helper',[])
         const authFactory = {};
 
         // Logs in the user when the correct credentials are given
-        authFactory.login = function (loginData) {
+        authFactory.login = (loginData) =>{
 
             // Authenticates the user by sending credentials to the backend
-            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/users/authenticate", loginData).then(function (response) {
+            return $http.post("https://cyborgs-ts-auth-service.herokuapp.com/users/authenticate", loginData).then( (response) => {
 
                 AuthToken.setAuthToken(response.data.token);
                 return response;
@@ -19,14 +19,14 @@ angular.module('cts.user-mgt.helper',[])
         };
 
         // Logs out the user by removing the token from the session storage
-        authFactory.logout = function () {
+        authFactory.logout =  () =>{
 
             AuthToken.setAuthToken();
 
         }
 
         // Authorize the user by using the token
-        authFactory.getUserDetails = function () {
+        authFactory.getUserDetails =  () =>{
 
             if (AuthToken.getAuthToken()) {
 
@@ -39,7 +39,7 @@ angular.module('cts.user-mgt.helper',[])
             }
         };
 
-        authFactory.isLoggedIn = function () {
+        authFactory.isLoggedIn =  () =>{
 
             if (AuthToken.getAuthToken()) {
 
@@ -70,6 +70,17 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
+        // Get all user details
+        authFactory.getAllUsers = () =>{
+
+            // Authenticates the user by sending credentials to the backend
+            return $http.get("https://cyborgs-ts-auth-service.herokuapp.com/users/").then( (response) => {
+
+                return response;
+
+            });
+        };
+
         return authFactory;
     }])
 
@@ -78,7 +89,7 @@ angular.module('cts.user-mgt.helper',[])
         const tokenFactory = {};
 
         // Store the auth tokens in local storage
-        tokenFactory.setAuthToken = function (token) {
+        tokenFactory.setAuthToken =  (token) =>{
 
             if (token) {
 
@@ -92,7 +103,7 @@ angular.module('cts.user-mgt.helper',[])
         }
 
         // Return auth token from the local storage
-        tokenFactory.getAuthToken = function () {
+        tokenFactory.getAuthToken =  () =>{
 
             return $window.sessionStorage.getItem('token');
 
@@ -108,7 +119,7 @@ angular.module('cts.user-mgt.helper',[])
 
         const authInterceptorsFactory = {};
 
-        authInterceptorsFactory.request = function(req) {
+        authInterceptorsFactory.request = (req) =>{
 
             const authToken = AuthToken.getAuthToken();
 
