@@ -1,0 +1,101 @@
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            Add Schedule
+            <!--Add Student tab-->
+            <md-tab label="Add Schedules">
+                <md-content class="md-padding">
+                    <form name="scheduleForm" id="scheduleForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+
+                                    </div>
+                                    <h4>Add Schedules</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Bus Number</label>
+                                            <input name="busNumber" ng-model="schedule.scheduleM.busNumber" required/>
+                                            <md-icon  class=" fa fa-plus md-primary" ng-click="schedule.searchStudents(student.studentM.class)"></md-icon>
+
+                                            <div ng-messages="studentForm.class.$error">
+                                                <div ng-message="required">Class is Required</div>
+                                            </div>
+
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Start Time</label>
+                                            <input name="startTime" ng-model="schedule.scheduleModel.startTime" required/>
+
+                                            <div ng-messages="scheduleForm.startTime.$error">
+                                                <div ng-message="required">Start Time Required</div>
+                                            </div>
+
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>End Time</label>
+                                            <input name="endTime" ng-model="schedule.scheduleModel.endTime" required/>
+
+                                            <div ng-messages="scheduleForm.endTime.$error">
+                                                <div ng-message="required">End Time is Required</div>
+                                            </div>
+
+                                        </md-input-container>
+
+
+                                        <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="schedule.addSchedule()">Add Schedule</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!--Schedule View tab-->
+            <md-tab label="View Schedule">
+
+                <md-table-container>
+                    <!--<md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">-->
+                        <!--<label>Search</label>-->
+                        <!--<input type="text" placeholder="Search Student" ng-model="searchStudent">-->
+                    <!--</md-input-container>-->
+
+                    <table md-table ng-model="schedule.selected" name="scheduleTable" id="scheduleTable">
+                        <thead md-head md-order="schedule.query.order" md-on-reorder="" >
+                        <tr md-row>
+                            <th md-column><span>Schedule ID</span></th>
+                            <th md-column>Bus Number</th>
+                            <th md-column>Start Time</th>
+                            <th md-column>End Time</th>
+                            <!--<th md-column></th>-->
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="scheduleModel" md-select-id="busNumber" md-auto-select ng-repeat="scheduleList in schedule.schedules | orderBy: schedule.query.order | limitTo: schedule.query.limit : (schedule.query.page -1) * schedule.query.limit">
+                            <td md-cell>{{scheduleList.scheduleId}}</td>
+                            <td md-cell>{{scheduleList.busNumber}}</td>
+                            <td md-cell>{{scheduleList.startTime}}</td>
+                            <td md-cell>{{scheduleList.endTime}}</td>
+                            <!--<td md-cell> <md-button class="md-icon-button" ng-click="schedule.updateSchedule()">-->
+                                <!--<md-icon md-font-library="material-icons" alt="Update schedule">update</md-icon>-->
+                            <!--</md-button>-->
+                            <!--</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="schedule.query.limit" md-limit-options="schedule.limitOptions" md-page="schedule.query.page" md-total="{{schedule.schedules.length}}" md-page-select="true"></md-table-pagination>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>
