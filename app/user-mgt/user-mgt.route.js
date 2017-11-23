@@ -19,8 +19,8 @@ angular.module('cts.user-mgt.route',[])
             controller: 'signUpCtrl as signUp'
         })
 
-        .state('test',{
-            url:'/test',
+        .state('.user',{
+            url:'/user',
             templateUrl: 'app/user-mgt/templates/user-mgt.html',
             controller: ''
         })
