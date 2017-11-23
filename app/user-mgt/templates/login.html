@@ -22,8 +22,13 @@
                             <div ng-message="required" class="my-message">Please enter your password.</div>
                         </div>
                     </md-input-container>
-                    <md-button ng-disabled="!loginForm.$valid" ng-click="login.doLogin(login.formData)" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
-                    <md-button  class="md-raised md-primary" ng-click="login.showSignUp()">&nbsp Sign Up &nbsp</md-button>
+
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="login.isLoding">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-button  ng-click="login.doLogin(login.formData)" class="md-raised md-primary" ng-disabled="login.visiblityOfLogin(loginForm.$valid)">&nbsp Login &nbsp</md-button>
+                    <md-button ng-disabled="login.isVisibleSignUp" class="md-raised md-primary" ng-click="login.showSignUp()">&nbsp Sign Up &nbsp</md-button>
                 </form>
             </md-card-content>
         </md-card>
@@ -33,5 +38,8 @@
     <br/>
     <br/>
     <br/>
-    <div id="toastParent"></div>
+    <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" flex>
+        <div id="toastParent"></div>
+    </md-content>
+
 </div>
