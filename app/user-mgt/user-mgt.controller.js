@@ -50,7 +50,7 @@ angular.module('cts.user-mgt.controller', [])
 
                         $location.path('/dashboard/feed');
 
-                    } else if (self.parseToken(response.data.token).permission == "foreign passenger") {
+                    } else if (self.parseToken(response.data.token).permission == "Foreign passenger") {
 
                         $location.path('/dashboard/feed');
 
@@ -67,7 +67,7 @@ angular.module('cts.user-mgt.controller', [])
                         $location.path('/dashboard/feed');
 
                     }
-                    else if (self.parseToken(response.data.token).permission == "local passenger") {
+                    else if (self.parseToken(response.data.token).permission == "Local passenger") {
 
                         $location.path('/dashboard/feed');
 
@@ -75,6 +75,7 @@ angular.module('cts.user-mgt.controller', [])
 
                 }).catch( (err) => {
                     self.isLoding = false;
+                    self.isVisibleSignUp = false;
                     self.showLoginToast("Could not authenticate user", 'error-toast')
                 })
             }
@@ -149,7 +150,6 @@ angular.module('cts.user-mgt.controller', [])
                 //self.setExpiryDate(self.user.type);
 
                 Auth.signUp(signUpDetails).then( (response) => {
-                    console.log(response);
 
                     if(response.data.success == true){
 
@@ -161,7 +161,7 @@ angular.module('cts.user-mgt.controller', [])
 
                         //create payement account
                         Auth.createPayementAccoutn(accountDetails).then((res) =>{
-
+                            console.log(res);
                             if(res.data.success == false){
 
                                 self.showToast('success-toast', response.data.message);
