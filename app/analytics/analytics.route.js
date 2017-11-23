@@ -4,14 +4,14 @@ angular.module('cts.analytics.route',[])
 
 .config(($stateProvider, $urlRouterProvider)=>{
 
-    /*
-        Enable below lines when need
-     */
+    $stateProvider
 
-    // $stateProvider
-    //     .state('', {
-    //         url: '',
-    //         templateUrl: '',
-    //         controller: ''
-    //     })
+        .state('login', {
+
+        url:'/schedule',
+        templateUrl: 'app/analytics/templates/schedule-mgt.html',
+        controller: 'scheduleController as schedule'
+
+        })
+
 })
