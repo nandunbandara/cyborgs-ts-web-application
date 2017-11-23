@@ -5,27 +5,17 @@ angular.module('cts.trip-mgt.controller',[])
     .controller('tripCtrl', function (Trip) {
 
         const self = this;
+        self.trips;
 
         self.loggedUserId = sessionStorage.getItem('userId');
 
         self.tripDetails = () =>{
 
-            Trip.getTripDtails(1).then((response) => {
+            Trip.getTripDtails( self.loggedUserId).then((response) => {
 
-                console.log(response);
+                self.trips = response.data.result;
             })
         }
 
-        self.tripDetails();
-
-        self.trips = [{
-
-          "journeyId":"1",
-            "startPoint":"Menikhinna",
-            "endPoint":"Malabe",
-            "distance":"96",
-            "joureyDate":"2017-11-17",
-            "busNumber":"CP-NA-4353"
-        }];
 
     })

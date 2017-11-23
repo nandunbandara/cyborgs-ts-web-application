@@ -19,4 +19,10 @@ angular.module('cts.user-mgt.route',[])
             controller: 'signUpCtrl as signUp'
         })
 
+        .state('dashboard.user',{
+            url:'/user',
+            templateUrl: 'app/user-mgt/templates/user-mgt.html',
+            controller: 'userCtrl as user'
+        })
+
 })

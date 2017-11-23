@@ -70,6 +70,17 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
+        // Get all user details
+        authFactory.getAllUsers = () =>{
+
+            // Authenticates the user by sending credentials to the backend
+            return $http.get("https://cyborgs-ts-auth-service.herokuapp.com/users/").then( (response) => {
+
+                return response;
+
+            });
+        };
+
         return authFactory;
     }])
 

@@ -46,7 +46,7 @@ angular.module('cts.user-mgt.controller', [])
                     }
 
                     //redirect user
-                    if (self.parseToken(response.data.token).permission == "admin") {
+                    if (self.parseToken(response.data.token).permission == "Admin") {
 
                         $location.path('/dashboard/feed');
 
@@ -54,15 +54,15 @@ angular.module('cts.user-mgt.controller', [])
 
                         $location.path('/dashboard/feed');
 
-                    }else if (self.parseToken(response.data.token).permission == "driver") {
+                    }else if (self.parseToken(response.data.token).permission == "Driver") {
 
                         $location.path('/dashboard/feed');
 
-                    }else if (self.parseToken(response.data.token).permission == "transport manager") {
+                    }else if (self.parseToken(response.data.token).permission == "Transport manager") {
 
                         $location.path('/dashboard/feed');
 
-                    }else if (self.parseToken(response.data.token).permission == "inspector") {
+                    }else if (self.parseToken(response.data.token).permission == "Inspector") {
 
                         $location.path('/dashboard/feed');
 
@@ -147,7 +147,7 @@ angular.module('cts.user-mgt.controller', [])
             //validate and save
             if( self.isContactNumber(signUpDetails.contact) ){
 
-                //self.setExpiryDate(self.user.type);
+                self.setExpiryDate(self.user.type);
 
                 Auth.signUp(signUpDetails).then( (response) => {
 
@@ -161,7 +161,7 @@ angular.module('cts.user-mgt.controller', [])
 
                         //create payement account
                         Auth.createPayementAccoutn(accountDetails).then((res) =>{
-                            console.log(res);
+
                             if(res.data.success == false){
 
                                 self.showToast('success-toast', response.data.message);
@@ -226,7 +226,7 @@ angular.module('cts.user-mgt.controller', [])
 
                 self.user.expiryDate =  new Date(CurrentDate.setMonth(CurrentDate.getMonth() + localPassengerExpirayDate));
 
-            }else{
+            }else if(passengerType == "Foreign passenger"){
 
                 self.user.expiryDate =  new Date(CurrentDate.setMonth(CurrentDate.getMonth() + ForeignPassengerExpiryDate));
             }
@@ -244,4 +244,109 @@ angular.module('cts.user-mgt.controller', [])
             }
         }
 
+    })
+
+    .controller('userCtrl', function (Auth ,$mdToast) {
+
+        const self = this;
+
+        self.isLoding =false;
+
+        self.users;
+
+
+        self.userModel = {
+            "name":"",
+            "email":"",
+            "type":"",
+            "contact":"",
+            "password":"",
+            "expiryDate":""
+        }
+
+        //add new user
+        self.addNewUser = (userDetails)=>{
+
+            self.isLoding =true;
+
+            Auth.signUp(userDetails).then((response) =>{
+
+                if(response.data.success == 'true'){
+
+                    self.isLoding =false;
+                    self.showToast('success-toast', response.data.message);
+
+                    //reset page
+                    self.userForm.$setPristine();
+                    self.userForm.$setUntouched();
+                    console.log('fsdfsdf');
+
+                }else{
+
+                    self.isLoding =false;
+                    self.showToast('error-toast',response.data.message);
+                }
+
+
+
+            })
+        }
+
+        //fill view user table
+        self.showAllUsers = () => {
+
+            Auth.getAllUsers().then((response) => {
+
+               self.users = response.data.message.result;
+
+            })
+        }
+
+        self.showAllUsers();
+
+        self.resetForm = () => {
+
+            self.userModel.name = "";
+            self.userModel.email = "";
+            self.userModel.type = "";
+            self.userModel.contact = "";
+            self.userModel.password = "";
+            self.userModel.expiryDate = "";
+            console.log('sdfsfsfsfsdfd');
+        }
+
+        self.showToast = (type, message) =>{
+
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .position('bottom right')
+                    .theme(type)
+                    .hideDelay(1500)
+                    .parent('userForm')
+
+            );
+
+        }
+
+        // validate contact number
+        self.isContactNumber =  (contactNumber) => {
+
+            if(contactNumber.length == 10){
+                return true;
+            }
+
+        }
+
+        self.visiblityOfSave = (formValidity) =>{
+
+            if(formValidity && !self.isLoding && self.isContactNumber(self.userModel.contact)) {
+
+                return false;
+            }
+            else{
+
+                return true;
+            }
+        }
     })
