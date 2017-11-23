@@ -1,0 +1,21 @@
+<div layout="column">
+    <md-content layout="row" ng-cloak="ng-cloak" flex>
+        <section>
+            <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" flex>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <h2><span>History</span></h2>
+                    </div>
+                </md-toolbar>
+            </md-content>
+            <md-list layout-padding="">
+                <md-list-item class="md-3-line" ng-repeat="item in trip.trips" ng-click="null">
+                    <div class="md-list-item-text">
+                        <h3><b>{{item.startPoint}} To {{item.endPoint}} </b></h3>
+                        <h4>{{item.joureyDate}}</h4>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+    </md-content>
+</div>

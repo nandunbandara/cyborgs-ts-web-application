@@ -5,10 +5,12 @@ angular.module('cts.routes', [
     'cts.dashboard.route',
     'cts.analytics.route',
     'cts.trip-mgt.route',
+    'cts.trip-mgt.controller',
     'cts.user-mgt.route',
     'cts.user-mgt.controller',
     'cts.payment-mgt.route',
-    'cts.user-mgt.helper'
+    'cts.user-mgt.helper',
+    'cts.trip-mgt.helper'
 
 ])
 

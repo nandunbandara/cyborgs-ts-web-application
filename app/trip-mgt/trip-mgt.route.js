@@ -6,14 +6,10 @@ angular.module('cts.trip-mgt.route', [])
         $urlRouterProvider
             .otherwise('/');
 
-        /*
-            Enable below lines when need
-         */
-
-        // $stateProvider
-        //     .state('',{
-        //         url:'',
-        //         templateUrl: '',
-        //         controller: ''
-        //     })
+        $stateProvider
+            .state('dashboard.trip',{
+                url:'/trip',
+                templateUrl: 'app/trip-mgt/main-view.html',
+                controller: 'tripCtrl as trip'
+            })
     })

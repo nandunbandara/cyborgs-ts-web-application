@@ -100,7 +100,7 @@ angular.module('cts.user-mgt.controller', [])
 
                 $mdToast.simple()
                     .textContent(message)
-                    .position('bottom')
+                    .position('bottom right')
                     .theme(theme)
                     .hideDelay(1500)
                     .parent('toastParent')
@@ -199,7 +199,7 @@ angular.module('cts.user-mgt.controller', [])
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(message)
-                    .position('bottom')
+                    .position('bottom right')
                     .theme(type)
                     .hideDelay(1500)
                     .parent('userForm')
@@ -236,7 +236,7 @@ angular.module('cts.user-mgt.controller', [])
 
         self.visiblityOfsignUp = (formValidity) =>{
 
-            if(formValidity && !self.isLoding) {
+            if(formValidity && !self.isLoding && self.isContactNumber(self.user.contact)) {
                 return false;
             }
             else{
