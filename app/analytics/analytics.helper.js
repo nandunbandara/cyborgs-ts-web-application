@@ -21,6 +21,22 @@ angular.module('cts.analytics')
 
        };
 
+       scheduleFactory.getScheduleByScheduleId = function(data){
+
+           return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/schedules/' + data).then(function (res) {
+               return res;
+           })
+
+       };
+
+       scheduleFactory.getBuses = function(data){
+
+           return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/buses').then(function (res) {
+               return res;
+           })
+
+       };
+
        scheduleFactory.addSchedule = function (data) {
 
            return $http.post('https://cyborgs-ts-analytics-service.herokuapp.com/schedules', data).then(function (res) {
@@ -65,6 +81,30 @@ angular.module('cts.analytics')
         inspectionFactory.getReportByDate = function(data){
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections/' + data).then(function (res) {
+                return res;
+            })
+
+        };
+
+        inspectionFactory.getReportById = function(data){
+
+            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections/' + data).then(function (res) {
+                return res;
+            })
+
+        };
+
+        inspectionFactory.getInspectors = function () {
+
+            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspectors').then(function (res) {
+                return res;
+            })
+
+        };
+
+        inspectionFactory.getRoutes = function () {
+
+            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/routes').then(function (res) {
                 return res;
             })
 
