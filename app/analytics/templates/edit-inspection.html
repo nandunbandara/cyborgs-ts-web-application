@@ -1,0 +1,59 @@
+<md-dialog class="edit-inspection-dialog" id="editInspection" name="editInspection">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Inspection Report Details</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="editUserForm" id="editUserForm">
+                <div layout="column">
+
+                    <md-input-container flex="50">
+                        <label>Inspector ID</label>
+                        <md-select name="inspectorId" ng-model="inspectionModel.inspectorId" required ng-readonly="!isEditMode">
+                            <md-option value=5>5</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="50">
+                        <label>Route Number</label>
+                        <md-select name="routeNumber" ng-model="inspectionModel.routeNumber" required ng-readonly="!isEditMode">
+                            <md-option value="613">613</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Report ID</label>
+                        <input type="text" name="inspectionId" required ng-model="inspectionModel.reportId" ng-readonly="true">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Inspected Date </label>
+                        <md-datepicker  required ng-model="inspectionModel.inspectionDate" ng-readonly="!isEditMode"></md-datepicker>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                        <label>Ticket Count</label>
+                        <input type="text" name="ticketCount" ng-model="inspectionModel.ticketCount" required ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="isLoading">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-dialog-actions>
+                        <md-button class="md-raised md-primary" ng-click="Update()" ng-disabled= "isLoading">{{editButtonTitle}}</md-button>
+                        <md-button class="md-raised md-primary" ng-click="cancel()">Cancel</md-button>
+                    </md-dialog-actions>
+
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,7 +1,7 @@
 'use strict'
 angular.module('cts.analytics')
 
-   .factory('Schedule',['$http',function ($http) {
+    .factory('Schedule',['$http',function ($http) {
 
        const scheduleFactory = {};
 

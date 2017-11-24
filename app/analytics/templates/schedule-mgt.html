@@ -61,19 +61,21 @@
 
             View Schedule
             <md-tab label="View Schedules" id="viewSchedules" name="viewSchedules">
-                <!--<md-input-container class="md-icon-float md-block">-->
-                <!--<label>Search</label>-->
-                <!--<md-icon md-font-icon="search" class="search"></md-icon>-->
-                <!--<input ng-model="user.searchBy" type="text">-->
-                <!--</md-input-container>-->
+
+                <md-input-container class="md-icon-float md-block">
+                <label>Search</label>
+                <md-icon md-font-icon="search" class="search"></md-icon>
+                <input ng-model="schedule.searchBy" type="text">
+                </md-input-container>
                 <md-content>
+
                     <md-list flex>
 
                         <div layout="row" layout-sm="column" layout-align="space-around" ng-show="schedule.isLoadingScheduleTable">
                             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                         </div>
                         <div class="col-md-12">
-                            <md-list-item class="md-3-line" ng-repeat="item in schedule.schedules" ng-click="schedule.showScheduleOnEditMode(item,$event)">
+                            <md-list-item class="md-3-line" ng-repeat="item in schedule.schedules | filter:schedule.searchBy" ng-click="schedule.showScheduleOnEditMode(item,$event)">
                                 <img ng-src="https://image.flaticon.com/icons/svg/305/305139.svg"
                                      class="md-avatar">
                                 <div class="md-list-item-text" layout="column">

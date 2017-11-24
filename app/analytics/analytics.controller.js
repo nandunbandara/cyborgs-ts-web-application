@@ -78,8 +78,6 @@ angular.module('cts.analytics', [])
 
                 if (res.data.success) {
 
-                    //self.schedules.push(scheduleDetails);
-
                     self.scheduleModel = {
 
                         scheduleId : "",
@@ -118,25 +116,7 @@ angular.module('cts.analytics', [])
             });
         };
 
-        /*self.updateSchedule = function(schedule){
-            Schedule.updateSchedule(schedule).then(function(res) {
-
-                if(res.data.success) {
-
-                    self.loadAllSchedules();
-                    self.showToast('success-toast', res.data.message);
-                    self.updateSchedule = {};
-                }
-                else {
-
-                    self.showToast('error-toast', res.data.message);
-
-                }
-
-            });
-        };*/
-
-        //show selected reminder on edit window
+        //show selected schedule on edit window
         self.showScheduleOnEditMode = (schedule,ev) => {
 
             self.selectedSchedule = schedule;
@@ -161,15 +141,11 @@ angular.module('cts.analytics', [])
 
             //init the selected schedule
             $scope.scheduleModel = angular.copy(self.selectedSchedule);
-            //$scope.userModel.expiryDate = new Date(self.selectedSchedule.expiryDate);
-
 
             $scope.isEditMode = false;
             $scope.editButtonTitle = 'Update';
             $scope.isLoading = false;
-            //$scope.minDate = new Date();
 
-            //update the user
             $scope.Update = () => {
 
                 if( !$scope.isEditMode ){
@@ -183,7 +159,7 @@ angular.module('cts.analytics', [])
 
                         if(res.data.success){
 
-                            self.showToast('success-toast', res.data.message.message);
+                            self.showToast('success-toast', "Successfully Updated!");
                             $scope.isEditMode = false;
                             $scope.editButtonTitle = 'Update';
                             self.loadAllSchedules();
@@ -192,7 +168,7 @@ angular.module('cts.analytics', [])
                         }
                         else{
 
-                            self.showToast('error-toast', res.data.message.message);
+                            self.showToast('error-toast', "Update Fail!");
 
                         }
                     })
@@ -368,24 +344,72 @@ angular.module('cts.analytics', [])
             });
         };
 
-        self.updateReport = function(inspection){
+        //show selected inspection on edit window
+        self.showInspectionOnEditMode = (inspection,ev) => {
 
-            Inspection.updateReport(inspection).then(function(res) {
+            self.selectedInspection = inspection;
+            $mdDialog
+                .show({
 
-                if(res.data.success) {
+                    controller: popUpController,
+                    templateUrl: 'app/analytics/templates/edit-inspection.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    fullscreen:true
 
-                    self.loadAllInspections();
-                    self.showToast('success-toast', res.data.message);
-                    self.updateReport = {};
-                }
-                else {
+                })
+                .then(() =>{
 
-                    self.showToast('error-toast', res.data.message);
-
-                }
-
-            });
+                })
         };
+
+        //controller for manage popups
+        function popUpController ($scope) {
+
+            //init the selected schedule
+            $scope.inspectionModel = angular.copy(self.selectedInspection);
+
+            $scope.isEditMode = false;
+            $scope.editButtonTitle = 'Update';
+            $scope.isLoading = false;
+
+            $scope.Update = () => {
+
+                if( !$scope.isEditMode ){
+
+                    $scope.isEditMode = true;
+                    $scope.editButtonTitle = 'Save';
+
+                }else{
+                    $scope.isLoading = true;
+                    Inspection.updateReport($scope.inspectionModel.reportId, $scope.inspectionModel).then((res) =>{
+
+                        if(res.data.success){
+
+                            self.showToast('success-toast', "Successfully Updated!");
+                            $scope.isEditMode = false;
+                            $scope.editButtonTitle = 'Update';
+                            self.loadAllInspections();
+                            //close the window
+                            $mdDialog.cancel();
+                        }
+                        else{
+
+                            self.showToast('error-toast', "Update Fail!");
+
+                        }
+                    })
+
+                }
+            }
+
+            //cancel
+            $scope.cancel = () => {
+
+                $mdDialog.cancel();
+            }
+        }
 
         self.showToast = function(type, message){
 
