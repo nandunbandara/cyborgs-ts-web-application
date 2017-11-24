@@ -1,0 +1,88 @@
+<div class="col-md-8 col-md-offset-2" ng-cloak layout-padding>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2><span>PAYMENT</span></h2>
+        </div>
+    </md-toolbar>
+
+    <md-content  style="padding: 50px">
+
+        <form id="paymentForm" name="paymentForm">
+
+            <div layout="column">
+
+                <!--Amount-->
+                <md-input-container>
+                    <label>Amount</label>
+                    <input type="number" name="amount" ng-model="topup.payment.amount" min="0" required>
+                    <div ng-messages="paymentForm.amount.$error">
+                        <div ng-message="required">Amount is required.</div>
+                    </div>
+                </md-input-container>
+
+                <!--Payment Method-->
+                <md-input-container>
+                    <label>Payment Method</label>
+                    <md-select ng-model="topup.payment.paymentMethod" placeholder="Select One" class="md-no-underline" required md-no-asterisk="false" name="paymentMethod">
+                        <md-option value="credit">Credit</md-option>
+                        <md-option value="debit">Debit</md-option>
+                    </md-select>
+                    <div ng-messages="paymentForm.paymentMethod.$error">
+                        <div ng-message="required">Please select a payment method</div>
+                    </div>
+                </md-input-container>
+
+                <!--Card holder's name-->
+                <md-input-container>
+                    <label>Card Holder's Name</label>
+                    <input type="text" name="name" ng-model="topup.payment.cardHolderName" min="0" required>
+                    <div ng-messages="paymentForm.name.$error">
+                        <div ng-message="required">Card holder's name is required.</div>
+                    </div>
+                </md-input-container>
+
+                <!--Card Number Area-->
+                <md-input-container>
+                    <label>Card Number</label>
+                    <input type="text" name="cardNumber" ng-model="topup.payment.cardNumber" required>
+                    <div ng-messages="paymentForm.cardNumber.$error">
+                        <div ng-message="required">Card number is required.</div>
+                    </div>
+                </md-input-container>
+
+                <!--Card Expiration-->
+                <md-input-container>
+                    <label>Expiration Date</label>
+                    <input type="date" name="cardExp" ng-model="topup.payment.cardExp" required>
+                    <div ng-messages="paymentForm.cardExp.$error">
+                        <div ng-message="required">Card expiration is required.</div>
+                    </div>
+                </md-input-container>
+
+                <!--CVV Area-->
+                <md-input-container>
+                    <label>Card CVV</label>
+                    <input type="number" name="cardCVV" ng-model="topup.payment.cardCVV" min="0" required>
+                    <div ng-messages="paymentForm.cardCVV.$error">
+                        <div ng-message="required">Card CVV is required.</div>
+                    </div>
+                </md-input-container>
+
+            </div>
+
+            <div class="col-md-9"></div>
+            <div class="col-md-9" ng-if="topup.errorMessage != null">
+                <h4>{{ topup.errorMessage }}</h4>
+            </div>
+            <div class="col-md-1">
+                <md-progress-circular ng-disabled="!topup.spinnerActivated" ng-show="topup.spinnerActivated" class="md-accent md-hue-2" md-diameter="30"></md-progress-circular>
+            </div>
+            <div class="col-md-2">
+                <md-button ng-disabled="!paymentForm.$valid" ng-click="topup.proceedPayment()" class="md-raised md-primary">Submit</md-button>
+            </div>
+
+        </form>
+
+    </md-content>
+</div>
