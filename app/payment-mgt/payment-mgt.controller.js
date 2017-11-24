@@ -5,6 +5,9 @@ angular.module('cts.payment-mgt', [])
     .controller('paymentCtrl', function (Payment) {
 
         const self = this;
+        self.isLoding = true;
+
+        //get logged user datails from session storage
         self.loggedUserId = sessionStorage.getItem('userId');
         self.loggedUserExpiryDate = sessionStorage.getItem('expiryDate')
 
@@ -20,7 +23,7 @@ angular.module('cts.payment-mgt', [])
         self.initAccoutnDetails = (userId) => {
 
                 Payment.getAccountDetails(userId).then((response) =>{
-
+                    self.isLoding = false;
                     self.userAccount.accountNumber = response.data.result[0].accountNumber;
                     self.userAccount.balance = response.data.result[0].balance;
                     self.userAccount.validity = response.data.result[0].validity;

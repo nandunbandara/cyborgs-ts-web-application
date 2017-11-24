@@ -5,6 +5,10 @@
             <h2><span>ACCOUNT</span></h2>
         </div>
     </md-toolbar>
+
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="payment.isLoding">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
     <md-content class="md-no-momentum">
         <md-input-container class="md-icon-float md-block">
             <label>Account number :</label>
