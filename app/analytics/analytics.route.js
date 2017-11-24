@@ -18,7 +18,7 @@ angular.module('cts.analytics.route',[])
 
         url:'/inspection',
         templateUrl: 'app/analytics/templates/inspection-mgt.html',
-        controller: 'inspectionController as schedule'
+        controller: 'inspectionController as inspection'
 
     })
 

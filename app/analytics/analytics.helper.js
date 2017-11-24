@@ -45,12 +45,21 @@ angular.module('cts.analytics')
 
        };
 
-       scheduleFactory.updateSchedule = function (data) {
+       // scheduleFactory.updateSchedule = function (data) {
+       //
+       //     return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.scheduleId , data).then(function (res) {
+       //         return res;
+       //     })
+       //
+       // };
 
-           return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.scheduleId , data).then(function (res) {
+       scheduleFactory.updateSchedule = (scheduleId,schedules) =>{
+
+           return $http.put("https://cyborgs-ts-analytics-service.herokuapp.com/schedules/".concat(scheduleId), schedules).then(function (res) {
+
                return res;
-           })
 
+           });
        };
 
        return scheduleFactory;
@@ -118,12 +127,22 @@ angular.module('cts.analytics')
 
         };
 
-        inspectionFactory.updateReport = function (data) {
+        // inspectionFactory.updateReport = function (data) {
+        //
+        //     return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.reportId , data).then(function (res) {
+        //         return res;
+        //     })
+        //
+        // };
 
-            return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.reportId , data).then(function (res) {
+        // update the report when the details are given
+        inspectionFactory.updateReport = (reportId,inspections) =>{
+
+            return $http.put("https://cyborgs-ts-analytics-service.herokuapp.com/schedules/".concat(reportId), inspections).then(function (res) {
+
                 return res;
-            })
 
+            });
         };
 
         return inspectionFactory;

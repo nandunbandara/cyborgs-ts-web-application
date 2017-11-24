@@ -1,10 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
 
-</body>
-</html>
+            Add Inspection
+            <md-tab label="Add Inspection">
+                <md-content class="md-padding">
+                    <form name="InspectionForm" id="InspectionForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+
+                                    </div>
+                                    <h4>Add Inspection Report</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container flex="50">
+                                            <label>Inspector ID</label>
+                                            <md-select name="inspectorId" ng-model="inspection.inspectionModel.inspectorId" required>
+                                                <md-option value=5>5</md-option>
+                                            </md-select>
+                                            <div class="errors" ng-messages="InspectionForm.inspectorId.$error">
+                                                <div ng-message="required">Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <br>
+
+                                        <md-input-container flex="50">
+                                            <label>Route Number</label>
+                                            <md-select name="routeNumber" ng-model="inspection.inspectionModel.routeNumber" required>
+                                                <md-option value="613">613</md-option>
+                                            </md-select>
+                                            <div class="errors" ng-messages="InspectionForm.routeNumber.$error">
+                                                <div ng-message="required">Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <div>
+                                            <label>Inspected Date</label>
+                                            <md-datepicker ng-model="inspection.inspectionModel.inspectionDate" md-placeholder="Enter date"></md-datepicker>
+                                        </div>
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Ticket Count</label>
+                                            <input name="ticketCount" ng-model="inspection.inspectionModel.ticketCount" required />
+
+                                            <div ng-messages="InspectionForm.ticketCount.$error">
+                                                <div ng-message="required">Ticket Count is Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="inspection.addInspection(inspection.inspectionModel)">Add Report</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            View Inspections
+            <md-tab label="View Inspections" id="viewInspections" name="viewInspections">
+                <!--<md-input-container class="md-icon-float md-block">-->
+                <!--<label>Search</label>-->
+                <!--<md-icon md-font-icon="search" class="search"></md-icon>-->
+                <!--<input ng-model="user.searchBy" type="text">-->
+                <!--</md-input-container>-->
+                <md-content>
+                    <md-list flex>
+
+                        <div layout="row" layout-sm="column" layout-align="space-around" ng-show="inspection.isLoadingInspectionTable">
+                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                        </div>
+                        <div class="col-md-12">
+                            <md-list-item class="md-3-line" ng-repeat="item in inspection.inspections">
+                                <img ng-src="https://image.flaticon.com/icons/svg/237/237021.svg"
+                                     class="md-avatar">
+                                <div class="md-list-item-text" layout="column">
+                                    <h3>
+                                        <h5>Inspected Date : {{ item.inspectionDate}} </h5>
+                                        <p>Report ID : {{ item.reportId}} </p>
+                                        <p># of Tickets : {{ item.ticketCount}} </p>
+                                        <p>Inspector ID :  {{ item.inspectorId}} </p>
+                                        <p>Route Number : {{ item.routeNumber}} </p>
+                                    </h3>
+                                </div>
+                            </md-list-item>
+                        </div>
+
+                    </md-list>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>
