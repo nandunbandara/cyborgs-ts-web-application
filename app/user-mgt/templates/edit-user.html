@@ -1,0 +1,61 @@
+<md-dialog class="edit-user-dialog" id="editGroup" name="editGroup">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>User Details</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="editUserForm" id="editUserForm">
+                <div layout="column">
+
+                    <md-input-container>
+                        <label>Name : </label>
+                        <input type="text" name="name" required ng-model="userModel.name" ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>User ID : </label>
+                        <input type="text" name="userId" required ng-model="userModel.userId" ng-readonly="true">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Email : </label>
+                        <input type="email" name="email" required ng-model="userModel.email" ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Contact : </label>
+                        <input type="text" name="contact" required ng-model="userModel.contact" ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <md-input-container ng-show="false">
+                        <label>Type : </label>
+                        <input type="text" name="type" required ng-model="userModel.type" ng-readonly="!isEditMode">
+                    </md-input-container>
+
+
+                    <md-input-container ng-show="isPassenger">
+                        <label>Expiry Date </label>
+                        <md-datepicker  required md-min-date="minDate" ng-model="userModel.expiryDate" ng-readonly="!isEditMode"></md-datepicker>
+                    </md-input-container>
+
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="isLoading">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-dialog-actions>
+                        <md-button class="md-raised md-primary" ng-click="Update()" ng-disabled= "isLoading">{{editButtonTitle}}</md-button>
+                        <md-button class="md-raised md-primary" ng-click="cancle()">Cancel</md-button>
+                    </md-dialog-actions>
+
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+</md-dialog>

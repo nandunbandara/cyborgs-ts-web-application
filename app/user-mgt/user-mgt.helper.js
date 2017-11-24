@@ -81,6 +81,18 @@ angular.module('cts.user-mgt.helper',[])
             });
         };
 
+        // update the user when the details are given
+        authFactory.update = (userId,userDetails) =>{
+
+            // Authenticates the user by sending credentials to the backend
+            return $http.put("https://cyborgs-ts-auth-service.herokuapp.com/users/".concat(userId), userDetails).then( (response) => {
+
+                AuthToken.setAuthToken(response.data.token);
+                return response;
+
+            });
+        };
+
         return authFactory;
     }])
 

@@ -31,7 +31,7 @@
             </div>
 
             <!--Trip Management-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.isPassenger">
                 <a ui-sref=".trip">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">
@@ -41,7 +41,7 @@
             </div>
 
             <!--Payment Management-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.isPassenger">
                 <a ui-sref="null">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">
@@ -51,7 +51,7 @@
             </div>
 
             <!--Analytics-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="!dash.isPassenger">
                 <a ui-sref="null">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">
@@ -74,8 +74,8 @@
     <md-sidenav md-component-id="right" class="md-sidenav-right" style="background-color: royalblue;">
         <div class="text-center side-nav-content">
             <img src="../../assets/images/avatar.png" width="90px" style="padding: 5px;"><br>
-            <h3>Name Here</h3>
-            <p><i>Permission Here</i></p>
+            <h3>{{dash.logedUser}}</h3>
+            <p><i>{{dash.permission}}</i></p>
             <md-divider></md-divider>
             <div class="logout-btn" style="margin-top: 20px;" ng-click="dash.logout()">
                 <md-button class="md-raised md-warn">Logout</md-button>
