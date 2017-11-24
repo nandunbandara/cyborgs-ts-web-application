@@ -3,8 +3,41 @@
             <md-card>
                 <md-tabs md-dynamic-height md-border-bottom >
 
+                    <!--Beginning of View Users Tab-->
+                    <md-tab label="View Users" id="viewUsers" name="viewUsers">
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Search</label>
+                            <md-icon md-font-icon="search" class="search"></md-icon>
+                            <input ng-model="user.searchBy" type="text">
+                        </md-input-container>
+                        <md-content>
+                            <md-list flex>
+
+                                <div layout="row" layout-sm="column" layout-align="space-around" ng-show="user.isLoadingUserTable">
+                                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                                </div>
+                                <div class="col-md-12">
+                                    <md-list-item class="md-3-line" ng-repeat="item in user.users | filter:user.searchBy"
+                                                  ng-click="user.showUserOnEditMode(item,$event)">
+                                        <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
+                                             class="md-avatar">
+                                        <div class="md-list-item-text" layout="column">
+                                            <h3>
+                                                <b> {{ item.name}} </b>
+                                                <p> {{ item.email}} </p>
+                                                <p> {{ item.type}} </p>
+                                            </h3>
+                                        </div>
+                                    </md-list-item>
+                                </div>
+
+                            </md-list>
+                        </md-content>
+                    </md-tab>
+                    <!--End of View Users Tab-->
+
                     <!--Beginning of Add Users Tab-->
-                    <md-tab label="Add Users">
+                    <md-tab label="Add Users" ng-disabled="!user.isAdmin">
                         <md-card-content>
                             <form name="userForm" id="userForm" novalidate>
                                 <div layout="column">
@@ -62,34 +95,6 @@
                     </md-tab>
                     <!--End of Add Users Tab-->
 
-                    <!--Beginning of View Users Tab-->
-                    <md-tab label="View Users" id="viewUsers" name="viewUsers">
-                        <md-input-container class="md-icon-float md-block">
-                            <label>Search</label>
-                            <md-icon md-font-icon="search" class="search"></md-icon>
-                            <input ng-model="user.searchBy" type="text">
-                        </md-input-container>
-                        <md-content>
-                            <md-list flex>
-                                <md-subheader class="md-no-sticky"></md-subheader>
-                                <div class="col-md-12">
-                                    <md-list-item class="md-3-line" ng-repeat="item in user.users | filter:user.searchBy"
-                                                  ng-click="user.showUserOnEditMode(item,$event)">
-                                        <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
-                                             class="md-avatar">
-                                        <div class="md-list-item-text" layout="column">
-                                            <h3>
-                                                <b> {{ item.name}} </b>
-                                                <p> {{ item.email}} </p>
-                                                <p> {{ item.type}} </p>
-                                            </h3>
-                                        </div>
-                                    </md-list-item>
-                                </div>
-                            </md-list>
-                        </md-content>
-                    </md-tab>
-                    <!--End of View Users Tab-->
                 </md-tabs>
             </md-card>
         </md-content>
@@ -108,7 +113,8 @@
         <md-content class="md-no-momentum">
             <md-input-container class="md-icon-float md-block">
                 <label>Name</label>
-                <md-icon md-svg-src="" class="name"></md-icon>
+
+                <md-icon md-svg-src="https://icons8.com/icon/2570/name" class="name"></md-icon>
                 <input ng-model="user.logUserDetails.name" type="text" ng-readonly="true">
             </md-input-container>
 

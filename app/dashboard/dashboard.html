@@ -31,7 +31,7 @@
             </div>
 
             <!--Trip Management-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.isPassenger">
                 <a ui-sref=".trip">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">
@@ -41,7 +41,7 @@
             </div>
 
             <!--Payment Management-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.isPassenger">
                 <a ui-sref="null">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">
@@ -51,7 +51,7 @@
             </div>
 
             <!--Analytics-->
-            <div class="side-nav-component text-center animated bounceInLeft">
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="!dash.isPassenger">
                 <a ui-sref="null">
                     <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
                     <img src="../../assets/images/icons/005-team.svg">

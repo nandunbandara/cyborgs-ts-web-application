@@ -139,6 +139,7 @@ angular.module('cts.user-mgt.controller', [])
             "expiryDate":""
         }
 
+
         //sign up
         self.doSignUp =  (signUpDetails) => {
 
@@ -252,6 +253,7 @@ angular.module('cts.user-mgt.controller', [])
 
         self.isLoding =false;
         self.users;
+        self.isLoadingUserTable = true;
 
         //init log user details
         self.logUserDetails = {
@@ -294,7 +296,7 @@ angular.module('cts.user-mgt.controller', [])
               self.isAdmin = true;
               self.isTrManager = false;
 
-          }else {
+          }else{
 
               self.isAdmin = false;
               self.isPassenger = false;
@@ -302,10 +304,6 @@ angular.module('cts.user-mgt.controller', [])
           }
       }
         self.setLogedUserType(self.loggedUserType);
-
-
-      //set the view according to logged user
-
 
         //add new user
         self.addNewUser = (userDetails)=>{
@@ -344,6 +342,7 @@ angular.module('cts.user-mgt.controller', [])
             Auth.getAllUsers().then((response) => {
 
                self.users = response.data.message.result;
+                self.isLoadingUserTable = false;
 
             })
         }
