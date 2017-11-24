@@ -6,6 +6,7 @@ angular.module('cts.trip-mgt.controller',[])
 
         const self = this;
         self.trips;
+        self.isLoading = true;
 
         self.loggedUserId = sessionStorage.getItem('userId');
 
@@ -14,6 +15,7 @@ angular.module('cts.trip-mgt.controller',[])
             Trip.getTripDtails( self.loggedUserId).then((response) => {
 
                 self.trips = response.data.result;
+                self.isLoading = false;
             })
         }
         self.tripDetails();
