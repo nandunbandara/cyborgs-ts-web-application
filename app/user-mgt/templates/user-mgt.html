@@ -96,7 +96,51 @@
 </div>
 
 <!--Beginning of view profiling -->
-<div ng-show="user.isPassenger"></div>
+<div ng-show="user.isPassenger">
+
+    <div  layout="column" layout-padding ng-cloak>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2><span>PROFILE</span></h2>
+            </div>
+        </md-toolbar>
+        <md-content class="md-no-momentum">
+            <md-input-container class="md-icon-float md-block">
+                <label>Name</label>
+                <md-icon md-svg-src="" class="name"></md-icon>
+                <input ng-model="user.logUserDetails.name" type="text" ng-readonly="true">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>User ID</label>
+                <md-icon md-svg-src="" class="name"></md-icon>
+                <input ng-model="user.logUserDetails.userId" type="text" ng-readonly="true">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>Contact Number</label>
+                <md-icon md-svg-src="" class="name"></md-icon>
+                <input ng-model="user.logUserDetails.contact" type="text" ng-readonly="true">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>Email</label>
+                <md-icon md-svg-src="" class="name"></md-icon>
+                <input ng-model="user.logUserDetails.email" type="text" ng-readonly="true">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <label>Type</label>
+                <md-icon md-svg-src="" class="name"></md-icon>
+                <input ng-model="user.logUserDetails.type" type="text" ng-readonly="true">
+            </md-input-container>
+
+        </md-content>
+
+    </div>
+
+</div>
 
 <!--custom style-->
 <style>

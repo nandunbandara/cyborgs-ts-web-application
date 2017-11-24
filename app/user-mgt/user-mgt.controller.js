@@ -253,6 +253,16 @@ angular.module('cts.user-mgt.controller', [])
         self.isLoding =false;
         self.users;
 
+        //init log user details
+        self.logUserDetails = {
+            "name":sessionStorage.getItem('name'),
+            "userId":sessionStorage.getItem('userId'),
+            "email":sessionStorage.getItem('email'),
+            "expiryDate":sessionStorage.getItem('expiryDate'),
+            "type":sessionStorage.getItem('permission'),
+            "contact":'0774092475',
+        }
+
 
         self.userModel = {
             "name":"",
@@ -283,7 +293,6 @@ angular.module('cts.user-mgt.controller', [])
               self.isPassenger = true;
               self.isAdmin = true;
               self.isTrManager = false;
-              console.log(self.isPassenger);
 
           }else {
 
