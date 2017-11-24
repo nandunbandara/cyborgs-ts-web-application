@@ -29,7 +29,7 @@ angular.module('cts.analytics', [])
         self.buses = [];
         self.isLoadingScheduleTable = true;
 
-
+        // Get Schedule By Bus Number
         self.searchSchedulesByBusNumber = function(data){
 
             Schedule.getSchedule(data).then(function(res){
@@ -44,6 +44,7 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get All the buses
         self.getBuses = function(){
 
             Schedule.getBuses().then(function(res){
@@ -58,6 +59,7 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get all the schedule
         self.loadAllSchedules = function () {
 
             Schedule.getAllSchedules().then(function (res) {
@@ -72,6 +74,7 @@ angular.module('cts.analytics', [])
 
         self.loadAllSchedules();
 
+        // Add a schedule for a bus
         self.addSchedule = function (scheduleDetails){
 
             Schedule.addSchedule(scheduleDetails).then(function (res) {
@@ -102,6 +105,7 @@ angular.module('cts.analytics', [])
 
         };
 
+        // Get Schedule By Schedule ID
         self.getScheduleById = function(data){
 
             Schedule.getScheduleByScheduleId(data).then(function(res){
@@ -116,7 +120,7 @@ angular.module('cts.analytics', [])
             });
         };
 
-        //show selected schedule on edit window
+        // Show selected schedule on edit window
         self.showScheduleOnEditMode = (schedule,ev) => {
 
             self.selectedSchedule = schedule;
@@ -136,7 +140,7 @@ angular.module('cts.analytics', [])
                 })
         };
 
-        //controller for manage popups
+        // Controller for manage popups
         function popUpController ($scope) {
 
             //init the selected schedule
@@ -215,6 +219,7 @@ angular.module('cts.analytics', [])
         self.inspections = [];
         self.selected = [];
         self.isLoadingInspectionTable = true;
+        self.numberOfRecords = 0;
 
         self.limitOptions = [5, 10, 15];
 
@@ -228,6 +233,7 @@ angular.module('cts.analytics', [])
         self.inspectionM = {};
         self.inspector = [];
 
+        // Get Report By Inspector ID
         self.getReportByInspector = function(data){
 
             Inspection.getReportByInspector(data).then(function(res){
@@ -242,6 +248,7 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get Report By ID
         self.getReportByDate = function(data){
 
             Inspection.getReportByDate(data).then(function(res){
@@ -256,6 +263,7 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get All Inspectors
         self.getInspectors = function(){
 
             Inspection.getInspectors().then(function(res){
@@ -270,6 +278,7 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get All the routes
         self.getRoutes = function(){
 
             Inspection.getRoutes().then(function(res){
@@ -284,26 +293,39 @@ angular.module('cts.analytics', [])
             });
         };
 
+        // Get All inspections
         self.loadAllInspections = function () {
 
             Inspection.getAllReports().then(function (res) {
 
                 self.inspections = res.data.message.result;
                 self.isLoadingInspectionTable = false;
+                self.numberOfRecords = self.inspections.length;
+                self.setDateFormat(self.inspections);
 
             });
 
         };
 
+        // Set date format
+        self.setDateFormat = (inspections) =>{
+            var i=0;
+
+            for(i = 0; i< self.numberOfRecords ;i++){
+
+                inspections[i].inspectionDate = inspections[i].inspectionDate.substring(0,10);
+
+            }
+        }
+
         self.loadAllInspections();
 
+        // Add inspection report
         self.addInspection = function (inspectionDetails){
 
             Inspection.addInspection(inspectionDetails).then(function (res) {
 
                 if (res.data.success) {
-
-                    //self.inspections.push(inspectionDetails);
 
                     self.inspectionModel = {
 
@@ -316,8 +338,6 @@ angular.module('cts.analytics', [])
                     };
 
                     self.selected = [];
-                    // $scope.inspectionForm.$setPristine();
-                    // $scope.inspectionForm.$setUntouched();
                     self.showToast('success-toast', res.data.message);
 
                 }
@@ -330,6 +350,7 @@ angular.module('cts.analytics', [])
 
         };
 
+        // Get Report by Report ID
         self.getReportById = function(data){
 
             Inspection.getReportById(data).then(function(res){

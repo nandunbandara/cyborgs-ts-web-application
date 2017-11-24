@@ -3,7 +3,7 @@
         <md-tabs md-dynamic-height md-border-bottom>
 
             Add Schedule
-            <!--Add Student tab-->
+            <!--Add Schedule tab-->
             <md-tab label="Add Schedules">
                 <md-content class="md-padding">
                     <form name="scheduleForm" id="scheduleForm">
@@ -46,7 +46,6 @@
 
                                         </md-input-container>
 
-
                                         <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
                                             <md-button class="md-raised md-primary" ng-click="schedule.addSchedule(schedule.scheduleModel)">Add Schedule</md-button>
                                         </div>
@@ -63,9 +62,9 @@
             <md-tab label="View Schedules" id="viewSchedules" name="viewSchedules">
 
                 <md-input-container class="md-icon-float md-block">
-                <label>Search</label>
-                <md-icon md-font-icon="search" class="search"></md-icon>
-                <input ng-model="schedule.searchBy" type="text">
+                    <label>Search</label>
+                    <md-icon md-font-icon="search" class="search"></md-icon>
+                    <input ng-model="schedule.searchBy" type="text">
                 </md-input-container>
                 <md-content>
 
