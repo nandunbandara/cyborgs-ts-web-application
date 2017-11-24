@@ -44,6 +44,7 @@
                                     <!--Name field-->
                                     <md-input-container>
                                         <label>Name</label>
+                                        <md-icon md-svg-src="../../assets/images/icons/user.svg" class="name"></md-icon>
                                         <input type="text" name="name" ng-model="user.userModel.name" required>
                                         <div ng-messages="userForm.name.$error">
                                             <div ng-message="required">Name is required.</div>
@@ -52,6 +53,7 @@
                                     <!--Contact field-->
                                     <md-input-container>
                                         <label>Contact Number</label>
+                                        <md-icon md-svg-src="../../assets/images/icons/contact2.svg" class="contact"></md-icon>
                                         <input type="text" name="name" ng-model="user.userModel.contact" required>
                                         <div ng-messages="userForm.contact.$error">
                                             <div ng-message="required">Contact Number is required.</div>
@@ -60,6 +62,7 @@
                                     <!--Email field-->
                                     <md-input-container>
                                         <label>Email</label>
+                                        <md-icon md-svg-src="../../assets/images/icons/email.svg" class="email"></md-icon>
                                         <input type="email" name="email" ng-model="user.userModel.email" required>
                                         <div ng-messages="userForm.email.$error">
                                             <div ng-message="userForm.email.$invalid">Enter a valid email.</div>
@@ -68,6 +71,7 @@
                                     <!--Permission field-->
                                     <md-input-container>
                                         <label>Type</label>
+                                        <md-icon md-svg-src="../../assets/images/icons/type1.svg" class="type"></md-icon>
                                         <md-select ng-model="user.userModel.type" placeholder="user type" class="md-no-underline" required md-no-asterisk="false" name="permission">
                                             <md-option value="Admin">Admin</md-option>
                                             <md-option value="Driver">Driver</md-option>
@@ -81,6 +85,7 @@
                                     <!--Password field-->
                                     <md-input-container>
                                         <label>Password</label>
+                                        <md-icon md-svg-src="../../assets/images/icons/password.svg" class="type"></md-icon>
                                         <input type="password" name="password" ng-model="user.userModel.password" required>
                                         <div ng-messages="required">
                                             <div ng-message="required">Password is required.</div>
