@@ -6,6 +6,9 @@ angular.module('cts.dashboard',[])
 
     let self = this;
 
+    self.logedUser = sessionStorage.getItem('name');
+    self.permission = sessionStorage.getItem('permission');
+
     self.openUserSideBar = function() {
         $mdSidenav('right').toggle();
     };

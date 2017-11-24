@@ -246,7 +246,7 @@ angular.module('cts.user-mgt.controller', [])
 
     })
 
-    .controller('userCtrl', function (Auth ,$mdToast, $scope) {
+    .controller('userCtrl', function (Auth ,$mdToast, $scope, $mdDialog) {
 
         const self = this;
 
@@ -263,6 +263,41 @@ angular.module('cts.user-mgt.controller', [])
             "expiryDate":""
         }
 
+        //set loged user type
+        self.isAdmin = false;
+        self.isPassenger = false;
+        self.isTrManager = false;
+
+        self.loggedUserType = sessionStorage.getItem('permission');
+
+      self.setLogedUserType = (type) => {
+
+          if(type == 'Admin'){
+
+              self.isAdmin = true;
+              self.isPassenger = false;
+              self.isTrManager = false;
+
+          }else if(type == 'Foreign passenger' || type == 'Local passenger'){
+
+              self.isPassenger = true;
+              self.isAdmin = true;
+              self.isTrManager = false;
+              console.log(self.isPassenger);
+
+          }else {
+
+              self.isAdmin = false;
+              self.isPassenger = false;
+              self.isTrManager = true;
+          }
+      }
+        self.setLogedUserType(self.loggedUserType);
+
+
+      //set the view according to logged user
+
+
         //add new user
         self.addNewUser = (userDetails)=>{
 
@@ -270,7 +305,7 @@ angular.module('cts.user-mgt.controller', [])
 
             Auth.signUp(userDetails).then((response) =>{
 
-                if(response.data.success == 'true'){
+                if(response.data.success){
 
                     self.isLoding =false;
                     self.showToast('success-toast', response.data.message);
@@ -351,4 +386,85 @@ angular.module('cts.user-mgt.controller', [])
                 return true;
             }
         }
+
+        //show selected reminder on edit window
+        self.showUserOnEditMode = (user,ev) => {
+
+            self.selectedUser = user;
+            $mdDialog
+                .show({
+
+                    controller: popUpController,
+                    templateUrl: 'app/user-mgt/templates/edit-user.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    fullscreen:true
+
+                })
+                .then(() =>{
+
+                })
+        };
+
+        //controller for manage popups
+        function popUpController ($scope) {
+
+            //init the selected user
+            $scope.userModel = angular.copy(self.selectedUser);
+            $scope.userModel.expiryDate = new Date(self.selectedUser.expiryDate);
+
+            //set the user type
+            if($scope.userModel.type == 'Foreign passenger' || $scope.userModel.type == 'Local passenger'){
+
+                $scope.isPassenger = true;
+            }
+            else{
+
+                $scope.isPassenger = false;
+            }
+
+            $scope.isEditMode = false;
+            $scope.editButtonTitle = 'Update';
+            $scope.isLoading = false;
+            $scope.minDate = new Date();
+
+            //update the user
+            $scope.Update = () => {
+
+                if( !$scope.isEditMode ){
+
+                    $scope.isEditMode = true;
+                    $scope.editButtonTitle = 'Save';
+
+                }else{
+                    $scope.isLoading = true;
+                        Auth.update($scope.userModel.userId, $scope.userModel).then((response) =>{
+
+                            if(response.data.success){
+
+                                self.showToast('success-toast', response.data.message.message);
+                                $scope.isEditMode = false;
+                                $scope.editButtonTitle = 'Update';
+                                self.showAllUsers();
+                                //close the window
+                                $mdDialog.cancel();
+                            }
+                            else{
+
+                                self.showToast('error-toast',response.data.message.message.message);
+                            }
+                        })
+
+                }
+            }
+
+            //cancle
+            $scope.cancle = () => {
+
+                $mdDialog.cancel();
+            }
+        }
+
+
     })

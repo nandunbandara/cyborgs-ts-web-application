@@ -16,6 +16,7 @@ angular.module('cts.trip-mgt.controller',[])
                 self.trips = response.data.result;
             })
         }
+        self.tripDetails();
 
 
     })

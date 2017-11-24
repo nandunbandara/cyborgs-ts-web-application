@@ -1,4 +1,4 @@
-<div class="col-md-12" ng-cloak>
+<div class="col-md-12" ng-cloak  ng-show="!user.isPassenger">
         <md-content>
             <md-card>
                 <md-tabs md-dynamic-height md-border-bottom >
@@ -34,7 +34,7 @@
                                     </md-input-container>
                                     <!--Permission field-->
                                     <md-input-container>
-                                        <label>Permission</label>
+                                        <label>Type</label>
                                         <md-select ng-model="user.userModel.type" placeholder="user type" class="md-no-underline" required md-no-asterisk="false" name="permission">
                                             <md-option value="Admin">Admin</md-option>
                                             <md-option value="Driver">Driver</md-option>
@@ -74,7 +74,7 @@
                                 <md-subheader class="md-no-sticky"></md-subheader>
                                 <div class="col-md-12">
                                     <md-list-item class="md-3-line" ng-repeat="item in user.users | filter:user.searchBy"
-                                                  ng-click="null">
+                                                  ng-click="user.showUserOnEditMode(item,$event)">
                                         <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
                                              class="md-avatar">
                                         <div class="md-list-item-text" layout="column">
@@ -82,7 +82,6 @@
                                                 <b> {{ item.name}} </b>
                                                 <p> {{ item.email}} </p>
                                                 <p> {{ item.type}} </p>
-
                                             </h3>
                                         </div>
                                     </md-list-item>
@@ -96,9 +95,18 @@
         </md-content>
 </div>
 
+<!--Beginning of view profiling -->
+<div ng-show="user.isPassenger"></div>
+
 <!--custom style-->
 <style>
     .label {
         color: #515151
     }
 </style>
+
+
+<!-- user details -->
+<div ng-show="true">
+
+</div>
