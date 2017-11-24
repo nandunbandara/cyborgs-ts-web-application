@@ -32,3 +32,76 @@ angular.module('cts.payment-mgt', [])
         }
         self.initAccoutnDetails(self.loggedUserId);
     })
+
+    .controller('topUpCtrl', function (Payment, $window, $state) {
+
+        const self = this;
+        self.payment = {
+
+            amount: "",
+            paymentMethod: "",
+            cardHolderName: $window.sessionStorage.getItem('name'),
+            cardNumber: "",
+            cardExp: "",
+            cardCVV: ""
+
+        }
+        self.successMessage = null;
+        self.errorMessage = null;
+        self.go = $state.go.bind($state);
+        self.spinnerActivated = false;
+
+        self.proceedPayment = function () {
+            self.spinnerActivated = true;
+
+            let payload = {
+
+                card: {
+
+                    cardNumber: self.payment.cardNumber,
+                    expDate: self.payment.cardExp
+                }
+            }
+
+            Payment.validateCard(payload).then((response) => {
+                self.spinnerActivated  = false;
+
+                if (response.data.message == 'valid') {
+                    self.spinnerActivated = true;
+
+                    let updatePayload = {
+
+                        account: {
+
+                            userId: $window.sessionStorage.getItem('userId'),
+                            updateType: "top-up",
+                            amount: self.payment.amount
+                        }
+                    }
+
+                    Payment.updateBalance(updatePayload).then((response) => {
+
+                        if (response.data.success) {
+
+                            self.successMessage = "Payment made successfully!";
+                            self.errorMessage = null;
+                            self.go("dashboard.payment");
+                        }
+
+                    })
+
+                } else if (response.data.message == 'invalid') {
+
+                    self.spinnerActivated = false;
+                    self.successMessage = null;
+                    self.errorMessage = "Entered card is invalid!";
+
+                }
+            }).catch((response) => {
+
+
+            })
+
+        }
+
+    })

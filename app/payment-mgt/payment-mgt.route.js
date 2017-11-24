@@ -13,4 +13,10 @@ angular.module('cts.payment-mgt.route',[])
             templateUrl: 'app/payment-mgt/main-view.html',
             controller: 'paymentCtrl as payment'
         })
+
+        .state('dashboard.topup',{
+            url:'/payments/topup',
+            templateUrl: 'app/payment-mgt/templates/top-up-view.html',
+            controller: 'topUpCtrl as topup'
+        })
 })
