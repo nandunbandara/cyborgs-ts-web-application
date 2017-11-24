@@ -5,6 +5,7 @@ angular.module('cts.analytics')
 
        const scheduleFactory = {};
 
+       // Get all Bus Schedule
        scheduleFactory.getAllSchedules = function () {
 
            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/schedules').then(function (res) {
@@ -13,6 +14,7 @@ angular.module('cts.analytics')
 
        };
 
+       // Get Schedules when Bus Number is Given
        scheduleFactory.getSchedule = function(data){
 
            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/schedules/' + data).then(function (res) {
@@ -21,6 +23,7 @@ angular.module('cts.analytics')
 
        };
 
+       // Get a Schedule when Schedule ID is given
        scheduleFactory.getScheduleByScheduleId = function(data){
 
            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/schedules/' + data).then(function (res) {
@@ -29,7 +32,8 @@ angular.module('cts.analytics')
 
        };
 
-       scheduleFactory.getBuses = function(data){
+       // Get All Buses
+       scheduleFactory.getBuses = function(){
 
            return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/buses').then(function (res) {
                return res;
@@ -37,6 +41,7 @@ angular.module('cts.analytics')
 
        };
 
+       // Add Bus Schedule
        scheduleFactory.addSchedule = function (data) {
 
            return $http.post('https://cyborgs-ts-analytics-service.herokuapp.com/schedules', data).then(function (res) {
@@ -45,14 +50,7 @@ angular.module('cts.analytics')
 
        };
 
-       // scheduleFactory.updateSchedule = function (data) {
-       //
-       //     return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.scheduleId , data).then(function (res) {
-       //         return res;
-       //     })
-       //
-       // };
-
+       // Update the Schedule when Schedule ID is Given
        scheduleFactory.updateSchedule = (scheduleId,schedules) =>{
 
            return $http.put("https://cyborgs-ts-analytics-service.herokuapp.com/schedules/".concat(scheduleId), schedules).then(function (res) {
@@ -71,6 +69,7 @@ angular.module('cts.analytics')
 
         const inspectionFactory = {};
 
+        // Get All Report
         inspectionFactory.getAllReports = function () {
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections').then(function (res) {
@@ -79,6 +78,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Get Reports when Inspector ID is given
         inspectionFactory.getReportByInspector = function(data){
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections/' + data).then(function (res) {
@@ -87,6 +87,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Get Reports when Inspected Date is given
         inspectionFactory.getReportByDate = function(data){
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections/' + data).then(function (res) {
@@ -95,6 +96,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Get Reports when Report ID is given
         inspectionFactory.getReportById = function(data){
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspections/' + data).then(function (res) {
@@ -103,6 +105,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Get All the Inspectors
         inspectionFactory.getInspectors = function () {
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/inspectors').then(function (res) {
@@ -111,6 +114,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Get All Routes
         inspectionFactory.getRoutes = function () {
 
             return $http.get('https://cyborgs-ts-analytics-service.herokuapp.com/routes').then(function (res) {
@@ -119,6 +123,7 @@ angular.module('cts.analytics')
 
         };
 
+        // Add a Inspection Report
         inspectionFactory.addInspection = function (data) {
 
             return $http.post('https://cyborgs-ts-analytics-service.herokuapp.com/inspections', data).then(function (res) {
@@ -127,15 +132,7 @@ angular.module('cts.analytics')
 
         };
 
-        // inspectionFactory.updateReport = function (data) {
-        //
-        //     return $http.put('https://cyborgs-ts-analytics-service.herokuapp.com/schedules' + data.reportId , data).then(function (res) {
-        //         return res;
-        //     })
-        //
-        // };
-
-        // update the report when the details are given
+        // Update the report when the details are given
         inspectionFactory.updateReport = (reportId,inspections) =>{
 
             return $http.put("https://cyborgs-ts-analytics-service.herokuapp.com/schedules/".concat(reportId), inspections).then(function (res) {
