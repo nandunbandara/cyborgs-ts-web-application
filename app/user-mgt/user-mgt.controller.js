@@ -28,11 +28,14 @@ angular.module('cts.user-mgt.controller', [])
                 Auth.login(loginData).then( (response) =>{
 
                     //store user details in session storage
+                    console.log(self.parseToken(response.data.token));
                     $window.sessionStorage.setItem('email',self.parseToken(response.data.token).email);
                     $window.sessionStorage.setItem('expiryDate',self.parseToken(response.data.token).expiryDate);
                     $window.sessionStorage.setItem('name',self.parseToken(response.data.token).name);
                     $window.sessionStorage.setItem('permission',self.parseToken(response.data.token).permission);
                     $window.sessionStorage.setItem('userId',self.parseToken(response.data.token).userId);
+                  //  $window.sessionStorage.setItem('contact',self.parseToken(response.data.token).contact);
+                    $window.sessionStorage.setItem('contact','0774092768');
 
                     //show messages
                     if (response.data.success === true) {
@@ -262,7 +265,7 @@ angular.module('cts.user-mgt.controller', [])
             "email":sessionStorage.getItem('email'),
             "expiryDate":sessionStorage.getItem('expiryDate'),
             "type":sessionStorage.getItem('permission'),
-            "contact":'0774092475',
+            "contact":sessionStorage.getItem('contact'),
         }
 
 
