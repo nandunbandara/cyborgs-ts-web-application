@@ -17,15 +17,14 @@
                                     <h4>Add Schedules</h4>
                                     <div class="col-md-12" style="margin-bottom: 10px;">
 
-                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                        <md-input-container flex="50">
                                             <label>Bus Number</label>
-                                            <input name="busNumber" ng-model="schedule.scheduleM.busNumber" required/>
-                                            <md-icon  class=" fa fa-plus md-primary" ng-click="schedule.searchStudents(student.studentM.class)"></md-icon>
-
-                                            <div ng-messages="studentForm.class.$error">
-                                                <div ng-message="required">Class is Required</div>
+                                            <md-select name="busNumber" ng-model="schedule.scheduleModel.busNumber" required>
+                                                <md-option value="CP-NA-4353">CP-NA-4353</md-option>
+                                            </md-select>
+                                            <div class="errors" ng-messages="scheduleForm.busNumber.$error">
+                                                <div ng-message="required">Required</div>
                                             </div>
-
                                         </md-input-container>
 
                                         <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
@@ -35,7 +34,6 @@
                                             <div ng-messages="scheduleForm.startTime.$error">
                                                 <div ng-message="required">Start Time Required</div>
                                             </div>
-
                                         </md-input-container>
 
                                         <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
@@ -50,7 +48,7 @@
 
 
                                         <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
-                                            <md-button class="md-raised md-primary" ng-click="schedule.addSchedule()">Add Schedule</md-button>
+                                            <md-button class="md-raised md-primary" ng-click="schedule.addSchedule(schedule.scheduleModel)">Add Schedule</md-button>
                                         </div>
                                     </div>
                                 </div>
@@ -60,40 +58,36 @@
                 </md-content>
             </md-tab>
 
-            <!--Schedule View tab-->
-            <md-tab label="View Schedule">
 
-                <md-table-container>
-                    <!--<md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">-->
-                        <!--<label>Search</label>-->
-                        <!--<input type="text" placeholder="Search Student" ng-model="searchStudent">-->
-                    <!--</md-input-container>-->
+            View Schedule
+            <md-tab label="View Schedules" id="viewSchedules" name="viewSchedules">
+                <!--<md-input-container class="md-icon-float md-block">-->
+                <!--<label>Search</label>-->
+                <!--<md-icon md-font-icon="search" class="search"></md-icon>-->
+                <!--<input ng-model="user.searchBy" type="text">-->
+                <!--</md-input-container>-->
+                <md-content>
+                    <md-list flex>
 
-                    <table md-table ng-model="schedule.selected" name="scheduleTable" id="scheduleTable">
-                        <thead md-head md-order="schedule.query.order" md-on-reorder="" >
-                        <tr md-row>
-                            <th md-column><span>Schedule ID</span></th>
-                            <th md-column>Bus Number</th>
-                            <th md-column>Start Time</th>
-                            <th md-column>End Time</th>
-                            <!--<th md-column></th>-->
-                        </tr>
-                        </thead>
-                        <tbody md-body>
-                        <tr md-row md-select="scheduleModel" md-select-id="busNumber" md-auto-select ng-repeat="scheduleList in schedule.schedules | orderBy: schedule.query.order | limitTo: schedule.query.limit : (schedule.query.page -1) * schedule.query.limit">
-                            <td md-cell>{{scheduleList.scheduleId}}</td>
-                            <td md-cell>{{scheduleList.busNumber}}</td>
-                            <td md-cell>{{scheduleList.startTime}}</td>
-                            <td md-cell>{{scheduleList.endTime}}</td>
-                            <!--<td md-cell> <md-button class="md-icon-button" ng-click="schedule.updateSchedule()">-->
-                                <!--<md-icon md-font-library="material-icons" alt="Update schedule">update</md-icon>-->
-                            <!--</md-button>-->
-                            <!--</td>-->
-                        </tr>
-                        </tbody>
-                    </table>
-                </md-table-container>
-                <md-table-pagination md-limit="schedule.query.limit" md-limit-options="schedule.limitOptions" md-page="schedule.query.page" md-total="{{schedule.schedules.length}}" md-page-select="true"></md-table-pagination>
+                        <div layout="row" layout-sm="column" layout-align="space-around" ng-show="schedule.isLoadingScheduleTable">
+                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                        </div>
+                        <div class="col-md-12">
+                            <md-list-item class="md-3-line" ng-repeat="item in schedule.schedules" ng-click="schedule.showScheduleOnEditMode(item,$event)">
+                                <img ng-src="https://image.flaticon.com/icons/svg/305/305139.svg"
+                                     class="md-avatar">
+                                <div class="md-list-item-text" layout="column">
+                                    <h3>
+                                        <h5> Bus Number : {{ item.busNumber}} </h5>
+                                        <p> Start Time : {{ item.startTime}} </p>
+                                        <p> End Time   : {{ item.endTime}} </p>
+                                    </h3>
+                                </div>
+                            </md-list-item>
+                        </div>
+
+                    </md-list>
+                </md-content>
             </md-tab>
 
         </md-tabs>

@@ -26,7 +26,9 @@ angular.module('cts.analytics', [])
         };
 
         self.results = [];
-        self.scheduleM = {};
+        self.buses = [];
+        self.isLoadingScheduleTable = true;
+
 
         self.searchSchedulesByBusNumber = function(data){
 
@@ -46,7 +48,7 @@ angular.module('cts.analytics', [])
 
             Schedule.getBuses().then(function(res){
 
-                self.results = res.data;
+                self.buses = res.data;
                 console.log(res.data);
 
             }, err => {
@@ -60,8 +62,9 @@ angular.module('cts.analytics', [])
 
             Schedule.getAllSchedules().then(function (res) {
 
-                self.schedules = res.data;
-                console.log(self.schedules);
+                self.schedules = res.data.message.result;
+                self.isLoadingScheduleTable = false;
+
 
             });
 
@@ -75,7 +78,7 @@ angular.module('cts.analytics', [])
 
                 if (res.data.success) {
 
-                    self.schedules.push(scheduleDetails);
+                    //self.schedules.push(scheduleDetails);
 
                     self.scheduleModel = {
 
@@ -115,7 +118,7 @@ angular.module('cts.analytics', [])
             });
         };
 
-        self.updateSchedule = function(schedule){
+        /*self.updateSchedule = function(schedule){
             Schedule.updateSchedule(schedule).then(function(res) {
 
                 if(res.data.success) {
@@ -131,7 +134,78 @@ angular.module('cts.analytics', [])
                 }
 
             });
+        };*/
+
+        //show selected reminder on edit window
+        self.showScheduleOnEditMode = (schedule,ev) => {
+
+            self.selectedSchedule = schedule;
+            $mdDialog
+                .show({
+
+                    controller: popUpController,
+                    templateUrl: 'app/analytics/templates/edit-schedule.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true,
+                    fullscreen:true
+
+                })
+                .then(() =>{
+
+                })
         };
+
+        //controller for manage popups
+        function popUpController ($scope) {
+
+            //init the selected schedule
+            $scope.scheduleModel = angular.copy(self.selectedSchedule);
+            //$scope.userModel.expiryDate = new Date(self.selectedSchedule.expiryDate);
+
+
+            $scope.isEditMode = false;
+            $scope.editButtonTitle = 'Update';
+            $scope.isLoading = false;
+            //$scope.minDate = new Date();
+
+            //update the user
+            $scope.Update = () => {
+
+                if( !$scope.isEditMode ){
+
+                    $scope.isEditMode = true;
+                    $scope.editButtonTitle = 'Save';
+
+                }else{
+                    $scope.isLoading = true;
+                    Schedule.updateSchedule($scope.scheduleModel.scheduleId, $scope.scheduleModel).then((res) =>{
+
+                        if(res.data.success){
+
+                            self.showToast('success-toast', res.data.message.message);
+                            $scope.isEditMode = false;
+                            $scope.editButtonTitle = 'Update';
+                            self.loadAllSchedules();
+                            //close the window
+                            $mdDialog.cancel();
+                        }
+                        else{
+
+                            self.showToast('error-toast', res.data.message.message);
+
+                        }
+                    })
+
+                }
+            }
+
+            //cancel
+            $scope.cancel = () => {
+
+                $mdDialog.cancel();
+            }
+        }
 
         self.showToast = function(type, message){
 
@@ -164,6 +238,7 @@ angular.module('cts.analytics', [])
 
         self.inspections = [];
         self.selected = [];
+        self.isLoadingInspectionTable = true;
 
         self.limitOptions = [5, 10, 15];
 
@@ -175,6 +250,7 @@ angular.module('cts.analytics', [])
 
         self.results = [];
         self.inspectionM = {};
+        self.inspector = [];
 
         self.getReportByInspector = function(data){
 
@@ -208,7 +284,7 @@ angular.module('cts.analytics', [])
 
             Inspection.getInspectors().then(function(res){
 
-                self.results = res.data;
+                self.inspector = res.data;
                 console.log(res.data);
 
             }, err => {
@@ -236,8 +312,8 @@ angular.module('cts.analytics', [])
 
             Inspection.getAllReports().then(function (res) {
 
-                self.inspections = res.data;
-                console.log(self.inspections);
+                self.inspections = res.data.message.result;
+                self.isLoadingInspectionTable = false;
 
             });
 
@@ -251,7 +327,7 @@ angular.module('cts.analytics', [])
 
                 if (res.data.success) {
 
-                    self.inspections.push(inspectionDetails);
+                    //self.inspections.push(inspectionDetails);
 
                     self.inspectionModel = {
 
@@ -264,8 +340,8 @@ angular.module('cts.analytics', [])
                     };
 
                     self.selected = [];
-                    $scope.inspectionForm.$setPristine();
-                    $scope.inspectionForm.$setUntouched();
+                    // $scope.inspectionForm.$setPristine();
+                    // $scope.inspectionForm.$setUntouched();
                     self.showToast('success-toast', res.data.message);
 
                 }

@@ -1,0 +1,52 @@
+<md-dialog class="edit-schedule-dialog" id="editSchedule" name="editSchedule">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Schedule Details</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="editUserForm" id="editUserForm">
+                <div layout="column">
+
+                    <md-input-container flex="50">
+                        <label>Bus Number</label>
+                        <md-select name="busNumber" ng-model="scheduleModel.busNumber" required ng-readonly="!isEditMode">
+                            <md-option value="CP-NA-4353">CP-NA-4353</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Schedule ID</label>
+                        <input type="text" name="scheduleId" required ng-model="scheduleModel.scheduleId" ng-readonly="true">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                        <label>Start Time</label>
+                        <input type="text" name="startTime" ng-model="scheduleModel.startTime" required ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                        <label>End Time</label>
+                        <input type="text" name="endTime" ng-model="scheduleModel.endTime" required ng-readonly="!isEditMode">
+                    </md-input-container>
+
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="isLoading">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-dialog-actions>
+                        <md-button class="md-raised md-primary" ng-click="Update()" ng-disabled= "isLoading">{{editButtonTitle}}</md-button>
+                        <md-button class="md-raised md-primary" ng-click="cancel()">Cancel</md-button>
+                    </md-dialog-actions>
+
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+</md-dialog>
