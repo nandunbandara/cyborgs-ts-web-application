@@ -72,11 +72,12 @@
             </div>
 
             <div class="col-md-9"></div>
-            <div class="col-md-9" ng-if="topup.errorMessage != null">
-                <h4>{{ topup.errorMessage }}</h4>
+            <div class="col-md-9">
+                <h4 class="payment-warning-text"  ng-if="topup.errorMessage != null">{{ topup.errorMessage }}</h4>
+                <h4 class="payment-warning-text"  ng-if="topup.successMessage != null">{{ topup.successMessage }}</h4>
             </div>
             <div class="col-md-1">
-                <md-progress-circular ng-disabled="!topup.spinnerActivated" ng-show="topup.spinnerActivated" class="md-accent md-hue-2" md-diameter="30"></md-progress-circular>
+                <md-progress-circular ng-disabled="!topup.spinnerActivated" ng-show="topup.spinnerActivated" class="md-accent md-hue-2" md-diameter="20"></md-progress-circular>
             </div>
             <div class="col-md-2">
                 <md-button ng-disabled="!paymentForm.$valid" ng-click="topup.proceedPayment()" class="md-raised md-primary">Submit</md-button>
