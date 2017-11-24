@@ -1,0 +1,43 @@
+<div  layout="column" layout-padding ng-cloak>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2><span>ACCOUNT</span></h2>
+        </div>
+    </md-toolbar>
+
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="payment.isLoding">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <md-content class="md-no-momentum">
+        <md-input-container class="md-icon-float md-block">
+            <label>Account number :</label>
+            <md-icon md-svg-src="../../assets/images/icons/accountId1.svg" class="name"></md-icon>
+            <input ng-model="payment.userAccount.accountNumber" type="text" ng-readonly="true">
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+            <label>Balance</label>
+            <md-icon md-svg-src="../../assets/images/icons/balance.svg" class="contact"></md-icon>
+            <input ng-model="payment.userAccount.balance" type="text" ng-readonly="true">
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+            <label>Validity</label>
+            <md-icon md-svg-src="../../assets/images/icons/validity.svg" class="userId"></md-icon>
+            <input ng-model="payment.userAccount.validity" type="text" ng-readonly="true">
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+            <label>Expiry Date</label>
+            <md-icon md-svg-src="../../assets/images/icons/expiryDate.svg" class="userId"></md-icon>
+            <input ng-model="payment.userAccount.expiryDate" type="text" ng-readonly="true">
+        </md-input-container>
+
+    </md-content>
+    <md-content>
+        <md-button  class="md-raised md-primary" ng-click="null">Top Up</md-button>
+    </md-content>
+
+
+</div>

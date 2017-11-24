@@ -6,14 +6,11 @@ angular.module('cts.payment-mgt.route',[])
     $urlRouterProvider
         .otherwise('/');
 
-    /*
-        Enable below lines when need
-     */
 
-    // $stateProvider
-    //     .state('',{
-    //         url:'',
-    //         templateUrl: '',
-    //         controller: ''
-    //     })
+    $stateProvider
+        .state('dashboard.payment',{
+            url:'/payments',
+            templateUrl: 'app/payment-mgt/main-view.html',
+            controller: 'paymentCtrl as payment'
+        })
 })
