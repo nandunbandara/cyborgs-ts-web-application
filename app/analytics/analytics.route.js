@@ -6,6 +6,13 @@ angular.module('cts.analytics.route',[])
 
     $stateProvider
 
+        .state('dashboard.analytics',{
+
+            url:'/analytics',
+            templateUrl:'app/analytics/templates/analytics-mgt.html',
+
+        })
+
         .state('dashboard.schedule', {
 
         url:'/schedule',
