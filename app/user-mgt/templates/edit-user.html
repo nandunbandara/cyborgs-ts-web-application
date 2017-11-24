@@ -16,26 +16,31 @@
 
                     <md-input-container>
                         <label>Name : </label>
+                        <md-icon md-svg-src="../../assets/images/icons/user.svg" class="name"></md-icon>
                         <input type="text" name="name" required ng-model="userModel.name" ng-readonly="!isEditMode">
                     </md-input-container>
 
                     <md-input-container>
                         <label>User ID : </label>
+                        <md-icon md-svg-src="../../assets/images/icons/userId.svg" class="type"></md-icon>
                         <input type="text" name="userId" required ng-model="userModel.userId" ng-readonly="true">
                     </md-input-container>
 
                     <md-input-container>
                         <label>Email : </label>
+                        <md-icon md-svg-src="../../assets/images/icons/email.svg" class="email"></md-icon>
                         <input type="email" name="email" required ng-model="userModel.email" ng-readonly="!isEditMode">
                     </md-input-container>
 
                     <md-input-container>
                         <label>Contact : </label>
+                        <md-icon md-svg-src="../../assets/images/icons/contact2.svg" class="contact"></md-icon>
                         <input type="text" name="contact" required ng-model="userModel.contact" ng-readonly="!isEditMode">
                     </md-input-container>
 
                     <md-input-container ng-show="false">
                         <label>Type : </label>
+                        <md-icon md-svg-src="../../assets/images/icons/type1.svg" class="type"></md-icon>
                         <input type="text" name="type" required ng-model="userModel.type" ng-readonly="!isEditMode">
                     </md-input-container>
 

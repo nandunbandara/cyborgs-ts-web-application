@@ -13,21 +13,25 @@
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Name </label>
+                        <md-icon md-svg-src="../../assets/images/icons/user.svg" class="name"></md-icon>
                         <input ng-model="signUp.user.name" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Email </label>
+                        <md-icon md-svg-src="../../assets/images/icons/email.svg" class="email"></md-icon>
                         <input ng-model="signUp.user.email" type="email" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Contact number </label>
+                        <md-icon md-svg-src="../../assets/images/icons/contact2.svg" class="contact"></md-icon>
                         <input ng-model="signUp.user.contact" required="">
                     </md-input-container>
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Type</label>
+                        <md-icon md-svg-src="../../assets/images/icons/type1.svg" class="type"></md-icon>
                         <md-select ng-model="signUp.user.type" required="" ng-change="signUp.setExpiryDate(typies.type)">
                             <md-option ng-repeat="typies in signUp.userTypies" value="{{typies.type}}">
                                 {{typies.type}}
@@ -38,6 +42,7 @@
 
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Password </label>
+                        <md-icon md-svg-src="../../assets/images/icons/password.svg" class="type"></md-icon>
                         <input ng-model="signUp.user.password" required="">
                     </md-input-container>
 

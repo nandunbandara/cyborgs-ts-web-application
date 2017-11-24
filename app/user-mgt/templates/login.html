@@ -10,6 +10,7 @@
                 <form name="loginForm">
                     <md-input-container class="md-block">
                         <label>Login</label>
+                        <md-icon md-svg-src="../../assets/images/icons/email.svg" class="email"></md-icon>
                         <input type="email" name="email" ng-model="login.formData.email" placeholder="email" required=""/>
                         <div ng-messages="" role="alert" multiple="">
                             <div ng-message="required" class="my-message">Please enter your email.</div>
@@ -17,6 +18,7 @@
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>Password</label>
+                        <md-icon md-svg-src="../../assets/images/icons/password.svg" class="type"></md-icon>
                         <input type="password" name="password" ng-model="login.formData.password" placeholder="password" required=""/>
                         <div ng-messages="" role="alert" multiple="">
                             <div ng-message="required" class="my-message">Please enter your password.</div>
