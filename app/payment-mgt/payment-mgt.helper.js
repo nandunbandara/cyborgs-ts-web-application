@@ -19,7 +19,7 @@ angular.module('cts.payment-mgt')
         paymentFactory.validateCard = (payload) => {
 
             // validate card when details are given
-            return $http.post('http://localhost:9803/cards/validate', payload).then((response) => {
+            return $http.post('https://cyborgs-ts-payment-service.herokuapp.com/cards/validate', payload).then((response) => {
 
                 return response;
 
