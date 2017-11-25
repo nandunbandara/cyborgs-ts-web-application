@@ -51,11 +51,11 @@ angular.module('cts.user-mgt.controller', [])
                     //redirect user
                     if (self.parseToken(response.data.token).permission == "Admin") {
 
-                        $location.path('/dashboard/feed');
+                        $location.path('/dashboard/user');
 
                     } else if (self.parseToken(response.data.token).permission == "Foreign passenger") {
 
-                        $location.path('/dashboard/feed');
+                        $location.path('/dashboard/user');
 
                     }else if (self.parseToken(response.data.token).permission == "Driver") {
 
@@ -63,7 +63,7 @@ angular.module('cts.user-mgt.controller', [])
 
                     }else if (self.parseToken(response.data.token).permission == "Transport manager") {
 
-                        $location.path('/dashboard/feed');
+                        $location.path('/dashboard/user');
 
                     }else if (self.parseToken(response.data.token).permission == "Inspector") {
 
@@ -72,7 +72,7 @@ angular.module('cts.user-mgt.controller', [])
                     }
                     else if (self.parseToken(response.data.token).permission == "Local passenger") {
 
-                        $location.path('/dashboard/feed');
+                        $location.path('/dashboard/user');
 
                     }
 
