@@ -2,7 +2,7 @@
     <div class="row">
 
         <!--Schedule Management-->
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show="!analytics.isInspector">
             <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
                 <md-card-title>
                     <md-card-title-text>
@@ -20,9 +20,8 @@
                 </md-card-actions>
             </md-card>
         </div>
-
         <!--Inspection Management-->
-        <div class="col-md-4">
+        <div class="col-md-4" ng-show="analytics.isInspector">
             <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
                 <md-card-title>
                     <md-card-title-text>
