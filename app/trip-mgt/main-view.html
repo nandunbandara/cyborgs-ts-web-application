@@ -7,7 +7,6 @@
             </h3>
         </div>
     </md-toolbar>
-    <br/>
     <div layout="row" layout-sm="column" layout-align="space-around" ng-if="trip.isLoading == true">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
@@ -24,6 +23,7 @@
                         <p>Distance : {{item.distance}}</p>
                         <p>Date : {{item.journeyDate}}</p>
                         <p>Bus : {{item.busNumber}}</p>
+                        <br/>
                     </h3>
                 </div>
             </md-list-item>

@@ -27,7 +27,7 @@ angular.module('cts.payment-mgt', [])
                     self.userAccount.accountNumber = response.data.result[0].accountNumber;
                     self.userAccount.balance = response.data.result[0].balance;
                     self.userAccount.validity = response.data.result[0].validity;
-                    self.userAccount.expiryDate = self.loggedUserExpiryDate;
+                    self.userAccount.expiryDate = self.loggedUserExpiryDate.substring(0,10);
                 })
         }
         self.initAccoutnDetails(self.loggedUserId);
