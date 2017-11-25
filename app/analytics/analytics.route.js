@@ -10,6 +10,7 @@ angular.module('cts.analytics.route',[])
 
             url:'/analytics',
             templateUrl:'app/analytics/templates/analytics-mgt.html',
+            controller:'analyticsController as analytics'
 
         })
 

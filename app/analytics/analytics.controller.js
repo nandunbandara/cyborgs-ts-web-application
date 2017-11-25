@@ -447,5 +447,31 @@ angular.module('cts.analytics', [])
 
     })
 
+    .controller('analyticsController', function () {
+        const self = this;
+
+        //set loged user type
+        self.isAdmin = false;
+        self.isInspector = false;
+
+        self.loggedUserType = sessionStorage.getItem('permission');
+        console.log(self.loggedUserType);
+
+        self.setLogedUserType = (type) => {
+
+            if( type == 'Admin'){
+
+                self.isAdmin = true;
+                self.isInspector = false;
+
+            }else if( type == 'Inspector'){
+
+                self.isAdmin = false;
+                self.isInspector = true;
+            }
+        }
+        self.setLogedUserType(self.loggedUserType);
+    })
+
 
     
